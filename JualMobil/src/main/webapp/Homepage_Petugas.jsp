@@ -1,10 +1,3 @@
-<%-- 
-    Document   : sidebar
-    Created on : 13 Dec 2024, 10.22.04
-    Author     : Dell
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -23,7 +16,6 @@
                 justify-content: center;
                 align-items: center;
                 height: 100vh;
-                overflow: hidden;
             }
 
             .container-regist {
@@ -31,7 +23,7 @@
                 width: 100%;
                 height: 100%;
                 position: relative;
-                overflow-y: hidden;
+                overflow: hidden;
             }
             .left-section {
                 background-color: #1D1A4A;
@@ -44,6 +36,7 @@
                 width: 150px;
                 font-size: 30px;
             }
+
             .left-section span {
                 color: #EC5A7E;
             }
@@ -51,7 +44,6 @@
                 margin: 0;
                 text-shadow: 2px 4px 5px rgba(0, 0, 0, 0.122);
             }
-            
             .title {
                 width: 250px;
                 display: flex;
@@ -60,7 +52,6 @@
                 margin-left: 20px;
                 margin-bottom: 50px;
             }
-
 
             .right-section {
                 overflow-y: auto; /* Bagian kanan scrollable */
@@ -76,9 +67,8 @@
                 box-shadow: -10px 0px 10px rgba(0, 0, 0, 0.142);
                 border-radius: 30px 0 0 30px;
             }
-            
-
-            .top-bar {
+          
+             .top-bar {
                 box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
                 width: 100%;
                 height: 100px;
@@ -106,6 +96,7 @@
                 top: 15px;
                 left: 15px;
                 color: #9ca3af;
+
 
             }
 
@@ -135,7 +126,7 @@
 
             .form-input:focus{
                 box-shadow: none;
-                border:none;
+              ��border: none;
             }
             
             .form-control{
@@ -186,6 +177,7 @@
             .nav-item a{
                 font-size: 14px;
             }
+
            
             .profile {
                 display: flex;  
@@ -202,6 +194,8 @@
                 color: black;
                 width: 200px;
                 padding: 10px;
+                position: absolute; /* Pastikan dropdown diposisikan secara absolut */
+                z-index: 1050; /* Pastikan nilainya lebih tinggi daripada elemen lainnya */
             }
             
             .dropdown-toggle::after {
@@ -221,21 +215,30 @@
                 margin-top: 80px;
                 display: flex;
                 flex-wrap: wrap;
-                gap: 60px;
+                gap: 80px;
                 justify-content: center;
+                position: relative; /* Tidak menyebabkan konflik dengan dropdown */
+                overflow: visible; /* Hindari menyembunyikan elemen dropdown */
             }
 
             .card {
-                width: 45%; /* 45% untuk 2 kolom, sisa 10% adalah jarak */
+                width: 35%; /* 45% untuk 2 kolom, sisa 10% adalah jarak */
                 border: 1px solid #ddd;
                 border-radius: 8px;
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                padding: 16px;
+                padding: 40px;
                 font-family: Poppins;
-                /*display: grid;  Gunakan Grid Layout */
-                /*grid-template-rows: auto auto auto auto auto;  Pastikan elemen memiliki baris tetap */
+                display: grid;  
+                grid-template-rows: auto auto auto auto auto; 
                 row-gap: 10px; /* Jarak antar elemen */
+                cursor: pointer;
+                transition: box-shadow 0.3s ease;
+                z-index: 1; /* Pastikan card tidak menutupi dropdown */
             }       
+            
+            .card:hover {
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
             
             .card img {
                 width: 100%;
@@ -281,6 +284,16 @@
                 font-weight: bold;
                 color: #000; /* Make text bold and black */
             }
+
+            .custom-modal-size{
+                max-width: 100%;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+            }
+            .modal-content {
+                width: 900px;
+            }
         </style>
     </head>
     <body>
@@ -302,13 +315,11 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="pencatatan.jsp" class="nav-link">
-                            <svg width="27" height="25" viewBox="0 0 27 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M23.8516 5.85936C23.7391 5.78916 23.6106 5.74875 23.4782 5.74191C23.3458 5.73508 23.2138 5.76205 23.0947 5.8203C18.9023 7.87108 15.9082 6.91014 12.7432 5.89647C9.41406 4.8369 5.97656 3.73827 1.21973 6.06053C1.08836 6.12467 0.977618 6.22439 0.900105 6.34834C0.822591 6.4723 0.781412 6.61551 0.78125 6.7617V18.4736C0.781231 18.6062 0.81494 18.7366 0.879203 18.8525C0.943467 18.9684 1.03617 19.0661 1.14859 19.1363C1.26102 19.2065 1.38946 19.247 1.52183 19.2539C1.65421 19.2608 1.78616 19.2339 1.90527 19.1758C6.09766 17.125 9.0918 18.0859 12.2617 19.0996C14.1406 19.7002 16.0547 20.3125 18.2188 20.3125C19.8877 20.3125 21.708 19.9492 23.7764 18.9394C23.9077 18.8753 24.0185 18.7756 24.096 18.6516C24.1735 18.5277 24.2147 18.3845 24.2148 18.2383V6.52635C24.216 6.39345 24.1833 6.26245 24.1197 6.14574C24.0561 6.02902 23.9639 5.93046 23.8516 5.85936ZM4.6875 14.8437C4.6875 15.0509 4.60519 15.2497 4.45868 15.3962C4.31216 15.5427 4.11345 15.625 3.90625 15.625C3.69905 15.625 3.50034 15.5427 3.35382 15.3962C3.20731 15.2497 3.125 15.0509 3.125 14.8437V8.59373C3.125 8.38653 3.20731 8.18782 3.35382 8.04131C3.50034 7.89479 3.69905 7.81248 3.90625 7.81248C4.11345 7.81248 4.31216 7.89479 4.45868 8.04131C4.60519 8.18782 4.6875 8.38653 4.6875 8.59373V14.8437ZM12.5 15.625C11.8819 15.625 11.2777 15.4417 10.7638 15.0983C10.2499 14.7549 9.8494 14.2669 9.61288 13.6959C9.37635 13.1249 9.31447 12.4965 9.43505 11.8903C9.55562 11.2841 9.85325 10.7273 10.2903 10.2903C10.7273 9.85324 11.2842 9.55561 11.8903 9.43503C12.4965 9.31445 13.1249 9.37634 13.6959 9.61286C14.2669 9.84938 14.755 10.2499 15.0983 10.7638C15.4417 11.2777 15.625 11.8819 15.625 12.5C15.625 13.3288 15.2958 14.1236 14.7097 14.7097C14.1237 15.2957 13.3288 15.625 12.5 15.625ZM21.875 16.4062C21.875 16.6134 21.7927 16.8122 21.6462 16.9587C21.4997 17.1052 21.301 17.1875 21.0938 17.1875C20.8865 17.1875 20.6878 17.1052 20.5413 16.9587C20.3948 16.8122 20.3125 16.6134 20.3125 16.4062V10.1562C20.3125 9.94903 20.3948 9.75032 20.5413 9.60381C20.6878 9.45729 20.8865 9.37498 21.0938 9.37498C21.301 9.37498 21.4997 9.45729 21.6462 9.60381C21.7927 9.75032 21.875 9.94903 21.875 10.1562V16.4062Z" fill="white"/>
-                            <line x1="22.2143" y1="15.7142" x2="22.2143" y2="24.7142" stroke="#77C270" stroke-width="3"/>
-                            <line x1="26.1429" y1="20.7858" x2="17.1429" y2="20.7858" stroke="#77C270" stroke-width="3"/>
-                            </svg>
-                            Pencatatan 
+                        <a href="produk.jsp" class="nav-link">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9 8V6H15V8H9ZM7 22C6.45 22 5.97933 21.8043 5.588 21.413C5.19667 21.0217 5.00067 20.5507 5 20C4.99933 19.4493 5.19533 18.9787 5.588 18.588C5.98067 18.1973 6.45133 18.0013 7 18C7.54867 17.9987 8.01967 18.1947 8.413 18.588C8.80633 18.9813 9.002 19.452 9 20C8.998 20.548 8.80233 21.019 8.413 21.413C8.02367 21.807 7.55267 22.0027 7 22ZM17 22C16.45 22 15.9793 21.8043 15.588 21.413C15.1967 21.0217 15.0007 20.5507 15 20C14.9993 19.4493 15.1953 18.9787 15.588 18.588C15.9807 18.1973 16.4513 18.0013 17 18C17.5487 17.9987 18.0197 18.1947 18.413 18.588C18.8063 18.9813 19.002 19.452 19 20C18.998 20.548 18.8023 21.019 18.413 21.413C18.0237 21.807 17.5527 22.0027 17 22ZM1 4V2H4.275L8.525 11H15.525L19.425 4H21.7L17.3 11.95C17.1167 12.2833 16.871 12.5417 16.563 12.725C16.255 12.9083 15.9173 13 15.55 13H8.1L7 15H19V17H7C6.25 17 5.679 16.675 5.287 16.025C4.895 15.375 4.88267 14.7167 5.25 14.05L6.6 11.6L3 4H1Z" fill="white"/>
+                                </svg>                                
+                            Produk 
                             <hr>
                         </a>
                     </li>
@@ -338,24 +349,31 @@
                             <div class="dropdown" style="display: inline-block;">
                                 <a href="#" class="dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"
                                     style="outline: none; box-shadow: none; border: none; display: flex; align-items: center;">
-                                    <img src="https://i.pinimg.com/736x/09/1e/b6/091eb62c743e1215099789d50c46a698.jpg" alt="" width="50" height="50" class="rounded-circle me-2"
+                                    <img src="https://i.pinimg.com/736x/42/ca/a2/42caa25497d797187ba0afc537ee4bfc.jpg" alt="" width="50" height="50" class="rounded-circle me-2"
                                         style="margin-right: 5px;">
                                     <svg class="dropdown-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"
                                         style="margin-left: 0;">
                                         <path d="M16.8583 5.19166L18.3333 6.66666L9.99998 15L1.66665 6.66666L3.14165 5.19166L9.99998 12.05L16.8583 5.19166Z" fill="#939393"/>
                                     </svg>
                                 </a>
-                                <div class="dropdown-menu" tabindex="-1" aria-hidden="true">
+                                <div class="dropdown-menu dropdown-menu-end" tabindex="-1" aria-hidden="true" style="z-index: 1050;">
                                     <div class="modal-dialog modal-dialog-custom">
                                       <div class="modal-content" style="height: 100%; width: 100%">
                                         <div class="modal-body modal-body-user text-center">
                                           <div class="mb-3">
-                                            <img src="https://i.pinimg.com/736x/09/1e/b6/091eb62c743e1215099789d50c46a698.jpg" alt="User Avatar" class="rounded-circle" style="width: 80px; height: 80px;">
+                                            <img src="https://i.pinimg.com/736x/42/ca/a2/42caa25497d797187ba0afc537ee4bfc.jpg" alt="User Avatar" class="rounded-circle" style="width: 80px; height: 80px;">
                                           </div>             
                                           <h5 class="user-info">
-                                            <span class="text">Ms. Galinda Upland</span> 
-                                            <p>Sales</p>
-                                          </h5>              
+                                            <span class="text">Ms. Elphaba Thropp</span> 
+                                            <p>Petugas</p>
+                                          </h5>  
+                                          <form action="#logout" method="POST">
+                                            <button type="submit" class="btn">
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M7.02301 5.5C5.4122 6.56898 4.18841 8.12823 3.53281 9.94691C2.87722 11.7656 2.82467 13.7471 3.38294 15.5979C3.94121 17.4488 5.08063 19.0707 6.63252 20.2236C8.18441 21.3765 10.0663 21.999 11.9995 21.999C13.9328 21.999 15.8146 21.3765 17.3665 20.2236C18.9184 19.0707 20.0578 17.4488 20.6161 15.5979C21.1744 13.7471 21.1218 11.7656 20.4662 9.94691C19.8106 8.12823 18.5868 6.56898 16.976 5.5M12 2V10" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    </svg>                                                    
+                                            </button>
+                                          </form>           
                                         </div>
                                       </div>
                                     </div>
@@ -365,8 +383,8 @@
                     </div>
                 </div>
                 <div class="card-container">
-                    <!-- Card 1 -->
-                    <div class="card">
+                    <!-- Card 1: Subaru Impreza -->
+                   <div class="card" data-bs-toggle="modal" data-bs-target="#carModal" data-id="SEDANS001">
                         <img src="images/subaru_impreza.jpg" alt="Subaru Impreza">
                         <h3>Subaru Impreza</h3>
                         <div class="info-container">
@@ -381,8 +399,12 @@
                         <p class="price">Rp 500,000</p>
                     </div>
 
-                    <!-- Card 2 -->
-                    <div class="card">
+                    <!-- Card 2: Toyota Camry -->
+                    <div class="card" data-bs-toggle="modal" data-bs-target="#carModal" 
+                         data-id="SEDANS002" data-name="Toyota Camry" data-type="Sedan" 
+                         data-color="White" data-plate="B 5678 CD" data-odometer="35,000 km" 
+                         data-engine-capacity="2500 cc" data-availability="Available" 
+                         data-chassis="2DEF45678UVW" data-engine="9876543210" data-price="Rp 700,000">
                         <img src="images/toyota_camry.jpg" alt="Toyota Camry">
                         <h3>Toyota Camry</h3>
                         <div class="info-container">
@@ -397,8 +419,12 @@
                         <p class="price">Rp 700,000</p>
                     </div>
 
-                    <!-- Card 3 -->
-                    <div class="card">
+                    <!-- Card 3: Honda Civic -->
+                    <div class="card" data-bs-toggle="modal" data-bs-target="#carModal" 
+                         data-id="SEDANS003" data-name="Honda Civic" data-type="Sedan" 
+                         data-color="Red" data-plate="A 9876 EF" data-odometer="50,000 km" 
+                         data-engine-capacity="1800 cc" data-availability="Out of Stock" 
+                         data-chassis="3XYZ78901LMN" data-engine="1029384756" data-price="Rp 600,000">
                         <img src="images/honda_civic.jpg" alt="Honda Civic">
                         <h3>Honda Civic</h3>
                         <div class="info-container">
@@ -413,8 +439,12 @@
                         <p class="price">Rp 600,000</p>
                     </div>
 
-                    <!-- Card 4 -->
-                    <div class="card">
+                    <!-- Card 4: Mazda 3 -->
+                    <div class="card" data-bs-toggle="modal" data-bs-target="#carModal" 
+                         data-id="SEDANS004" data-name="Mazda 3" data-type="Sedan" 
+                         data-color="Black" data-plate="F 1111 GH" data-odometer="15,000 km" 
+                         data-engine-capacity="1600 cc" data-availability="Available" 
+                         data-chassis="4LMN23456OPQ" data-engine="5678901234" data-price="Rp 550,000">
                         <img src="images/mazda_3.jpg" alt="Mazda 3">
                         <h3>Mazda 3</h3>
                         <div class="info-container">
@@ -429,8 +459,12 @@
                         <p class="price">Rp 550,000</p>
                     </div>
 
-                    <!-- Card 5 -->
-                    <div class="card">
+                    <!-- Card 5: Nissan Altima -->
+                    <div class="card" data-bs-toggle="modal" data-bs-target="#carModal" 
+                         modal-id="SEDANS005" data-name="Nissan Altima" data-type="Sedan" 
+                         data-color="Silver" data-plate="E 2222 IJ" data-odometer="40,000 km" 
+                         data-engine-capacity="2400 cc" data-availability="Available" 
+                         data-chassis="5PQR56789XYZ" data-engine="8765432109" data-price="Rp 650,000">
                         <img src="images/nissan_altima.jpg" alt="Nissan Altima">
                         <h3>Nissan Altima</h3>
                         <div class="info-container">
@@ -445,8 +479,12 @@
                         <p class="price">Rp 650,000</p>
                     </div>
 
-                    <!-- Card 6 -->
-                    <div class="card" data-bs-toggle="modal" data-bs-target="#carModal" data-id="SEDANS002" data-name="Toyota Camry" data-type="Sedan" data-plate="B 5678 CD" data-price="Rp 700,000">
+                    <!-- Card 6: Kia Optima -->
+                    <div class="card" data-bs-toggle="modal" data-bs-target="#carModal" 
+                         data-id="SEDANS006" data-name="Kia Optima" data-type="Sedan" 
+                         data-color="Grey" data-plate="G 3333 KL" data-odometer="25,000 km" 
+                         data-engine-capacity="2200 cc" data-availability="Out of Stock" 
+                         data-chassis="6STU67890XYZ" data-engine="5432167890" data-price="Rp 600,000">
                         <img src="images/kia_optima.jpg" alt="Kia Optima">
                         <h3>Kia Optima</h3>
                         <div class="info-container">
@@ -463,106 +501,195 @@
                 </div>
                 <!-- Modal -->
                 <div class="modal fade" id="carModal" tabindex="-1" aria-labelledby="carModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
+                    <div class="modal-dialog custom-modal-size">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="carModalLabel">Informasi Mobil</h5>
+                                <h5 class="modal-title" id="carModalLabel">Detail Mobil</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <div class="modal-body text-center">
-                                <img id="carImage" src="" alt="Car" class="img-fluid mb-4">
-                                <h3 id="carName"></h3>
-                                <p><strong>ID Mobil:</strong> <span id="carId"></span></p>
-                                <p><strong>Type:</strong> <span id="carType"></span></p>
-                                <p><strong>Plat Nomor:</strong> <span id="carPlate"></span></p>
-                                <p class="price"><strong>Harga:</strong> <span id="carPrice"></span></p>
+                            <div class="modal-body">
+                                <img id="modalImage" src="" alt="Car Image" class="img-fluid mb-3">
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <label for="exampleFormControlTextarea1" class="form-label">ID Mobil</label>
+                                        <input type="text" class="form-control"  value=" XXX" aria-label="Disabled input example" disabled readonly>
+                                    </div>
+                                    <div class="col">
+                                        <label for="exampleFormControlTextarea1" class="form-label">Nama Mobil</label>
+                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example" disabled readonly>
+                                    </div>
+                                    <div class="col">
+                                        <label for="exampleFormControlTextarea1" class="form-label">Type</label>
+                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example" disabled readonly>
+                                    </div>
+                                    <div class="col">
+                                        <label for="exampleFormControlTextarea1" class="form-label">Warna Mobil</label>
+                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example" disabled readonly>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <label for="exampleFormControlTextarea1" class="form-label">Plat Nomor</label>
+                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example" disabled readonly>
+                                    </div>
+                                    <div class="col">
+                                        <label for="exampleFormControlTextarea1" class="form-label">Odometer</label>
+                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example" disabled readonly>
+                                    </div>
+                                    <div class="col">
+                                        <label for="exampleFormControlTextarea1" class="form-label">Kapasitas Mesin</label>
+                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example" disabled readonly>
+                                    </div>
+                                    <div class="col">
+                                        <label for="exampleFormControlTextarea1" class="form-label">Ketersediaan</label>
+                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example" disabled readonly>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <label for="exampleFormControlTextarea1" class="form-label">Nomor Rangka</label>
+                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example" disabled readonly>
+                                    </div>
+                                    <div class="col">
+                                        <label for="exampleFormControlTextarea1" class="form-label">Nomor Mesin</label>
+                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example" disabled readonly>
+                                    </div>
+                                    <div class="col">
+                                        <label for="exampleFormControlTextarea1" class="form-label">Harga</label>
+                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example" disabled readonly>
+                                    </div>
+                                </div>
+                                <!-- <img id="modalImage" src="" alt="Car Image" class="img-fluid mb-3">
+                                <h3 id="modalName"></h3>
+                                <p><strong>Type:</strong> <span id="modalType"></span></p>
+                                <p><strong>Warna:</strong> <span id="modalColor"></span></p>
+                                <p><strong>Plat Nomor:</strong> <span id="modalPlate"></span></p>
+                                <p><strong>Odometer:</strong> <span id="modalOdometer"></span></p>
+                                <p><strong>Kapasitas Mesin:</strong> <span id="modalEngineCapacity"></span></p>
+                                <p><strong>Ketersediaan:</strong> <span id="modalAvailability"></span></p>
+                                <p><strong>Nomor Rangka:</strong> <span id="modalChassisNumber"></span></p>
+                                <p><strong>Nomor Mesin:</strong> <span id="modalEngineNumber"></span></p>
+                                <p><strong>Harga Sewa:</strong> <span id="modalPrice"></span></p>
+                                <p><strong>ID Mobil:</strong> <span id="modalID"></span></p> -->
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
             <!-- Bootstrap JS -->
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
-            <script>
-                // Data statistik mobil
-                const cars = [
-                    {
-                        id: "SEDANS001",
-                        name: "Subaru Impreza",
-                        type: "Sedan",
-                        plate: "D 1234 AB",
-                        price: "Rp 500,000",
-                        image: "images/subaru_impreza.jpg"
-                    },
-                    {
-                        id: "SEDANS002",
-                        name: "Toyota Camry",
-                        type: "Sedan",
-                        plate: "B 5678 CD",
-                        price: "Rp 700,000",
-                        image: "images/toyota_camry.jpg"
-                    },
-                    {
-                        id: "SEDANS003",
-                        name: "Honda Civic",
-                        type: "Sedan",
-                        plate: "A 9876 EF",
-                        price: "Rp 600,000",
-                        image: "images/honda_civic.jpg"
-                    },
-                    {
-                        id: "SEDANS004",
-                        name: "Mazda 3",
-                        type: "Sedan",
-                        plate: "F 1111 GH",
-                        price: "Rp 550,000",
-                        image: "images/mazda_3.jpg"
-                    }
-                ];
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            // Ambil semua elemen dengan atribut data-bs-toggle="modal"
+            const carsData = [
+                {
+                    id: 'SEDANS001',
+                    name: 'Subaru Impreza',
+                    type: 'Sedan',
+                    color: 'Merah',
+                    plate: 'D 1234 AB',
+                    odometer: '25,000 km',
+                    engineCapacity: '2.0 L',
+                    availability: 'Tersedia',
+                    chassisNumber: 'X1234567890',
+                    engineNumber: 'EN1234567890',
+                    price: 'Rp 500,000',
+                    image: 'images/subaru_impreza.jpg'
+                },
+                {
+                    id: 'SEDANS002',
+                    name: 'Toyota Camry',
+                    type: 'Sedan',
+                    color: 'Putih',
+                    plate: 'B 5678 CD',
+                    odometer: '35,000 km',
+                    engineCapacity: '2.5 L',
+                    availability: 'Tersedia',
+                    chassisNumber: 'X0987654321',
+                    engineNumber: 'EN0987654321',
+                    price: 'Rp 700,000',
+                    image: 'images/toyota_camry.jpg'
+                },
+                {
+                    id: 'SEDANS003',
+                    name: 'Honda Civic',
+                    type: 'Sedan',
+                    color: 'Biru',
+                    plate: 'A 9876 EF',
+                    odometer: '20,000 km',
+                    engineCapacity: '1.8 L',
+                    availability: 'Tersedia',
+                    chassisNumber: 'X1122334455',
+                    engineNumber: 'EN1122334455',
+                    price: 'Rp 600,000',
+                    image: 'images/honda_civic.jpg'
+                },
+                {
+                    id: 'SEDANS004',
+                    name: 'Mazda 3',
+                    type: 'Sedan',
+                    color: 'Hitam',
+                    plate: 'F 1111 GH',
+                    odometer: '15,000 km',
+                    engineCapacity: '2.0 L',
+                    availability: 'Tersedia',
+                    chassisNumber: 'X2233445566',
+                    engineNumber: 'EN2233445566',
+                    price: 'Rp 550,000',
+                    image: 'images/mazda_3.jpg'
+                },
+                {
+                    id: 'SEDANS005',
+                    name: 'Nissan Altima',
+                    type: 'Sedan',
+                    color: 'Abu-abu',
+                    plate: 'E 2222 IJ',
+                    odometer: '40,000 km',
+                    engineCapacity: '2.5 L',
+                    availability: 'Tersedia',
+                    chassisNumber: 'X3344556677',
+                    engineNumber: 'EN3344556677',
+                    price: 'Rp 650,000',
+                    image: 'images/nissan_altima.jpg'
+                },
+                {
+                    id: 'SEDANS006',
+                    name: 'Kia Optima',
+                    type: 'Sedan',
+                    color: 'Perak',
+                    plate: 'G 3333 KL',
+                    odometer: '30,000 km',
+                    engineCapacity: '2.4 L',
+                    availability: 'Tersedia',
+                    chassisNumber: 'X4455667788',
+                    engineNumber: 'EN4455667788',
+                    price: 'Rp 600,000',
+                    image: 'images/kia_optima.jpg'
+                }
+            ];
 
-                // Generate cards dynamically
-                const cardContainer = document.getElementById("cardContainer");
+              // Menangani event klik pada setiap card
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                card.addEventListener('click', (e) => {
+                    // Mendapatkan ID mobil yang dipilih
+                    const carID = card.getAttribute('data-id');
 
-                cars.forEach(car => {
-                    const card = document.createElement("div");
-                    card.className = "card";
-                    card.setAttribute("data-bs-toggle", "modal");
-                    card.setAttribute("data-bs-target", "#carModal");
-                    card.setAttribute("data-id", car.id);
+                    // Mencari data mobil yang sesuai dengan ID
+                    const car = carsData.find(car => car.id === carID);
 
-                    card.innerHTML = `
-                        <img src="${car.image}" alt="${car.name}">
-                        <h3>${car.name}</h3>
-                        <p>Type: <span>${car.type}</span></p>
-                        <p>Plat Nomor: <span>${car.plate}</span></p>
-                        <p class="price">${car.price}</p>
-                    `;
+                    // Mengisi data ke dalam modal
+                    document.getElementById('modalImage').src = car.image;
+                    document.getElementById('modalName').innerText = car.name;
+                    document.getElementById('modalType').innerText = car.type;
+                    document.getElementById('modalColor').innerText = car.color;
+                    document.getElementById('modalPlate').innerText = car.plate;
+                    document.getElementById('modalOdometer').innerText = car.odometer;
+                    document.getElementById('modalEngineCapacity').innerText = car.engineCapacity;
+                    document.getElementById('modalAvailability').innerText = car.availability;
+                    document.getElementById('modalChassisNumber').innerText = car.chassisNumber;
+        </script>
 
-                    cardContainer.appendChild(card);
-                });
-
-                // Event listener for modal
-                const carModal = document.getElementById("carModal");
-                carModal.addEventListener("show.bs.modal", function (event) {
-                    const card = event.relatedTarget; // Card that triggered the modal
-                    const carId = card.getAttribute("data-id");
-
-                    // Find car data based on ID
-                    const car = cars.find(car => car.id === carId);
-
-                    if (car) {
-                        // Update modal content
-                        document.getElementById("carImage").setAttribute("src", car.image);
-                        document.getElementById("carName").textContent = car.name;
-                        document.getElementById("carId").textContent = car.id;
-                        document.getElementById("carType").textContent = car.type;
-                        document.getElementById("carPlate").textContent = car.plate;
-                        document.getElementById("carPrice").textContent = car.price;
-                    }
-                });
-            </script>
-             </div> 
-            </div>
     </div>
     </body>
 </html>
