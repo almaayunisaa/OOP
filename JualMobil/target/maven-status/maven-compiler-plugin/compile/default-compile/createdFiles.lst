@@ -1,3 +1,8 @@
-com\mycompany\jualmobil\JualMobilApplication.class
+com\mycompany\jualmobil\beans\Mobil.class
+com\mycompany\jualmobil\beans\Sedan.class
+com\mycompany\jualmobil\beans\Petugas.class
+com\mycompany\jualmobil\beans\Sales.class
+com\mycompany\jualmobil\beans\Penjualan.class
 com\mycompany\jualmobil\resources\JakartaEE11Resource.class
-com\mycompany\jualmobil\JakartaRestConfiguration.class
+com\mycompany\jualmobil\beans\MPV.class
+com\mycompany\jualmobil\JualMobilApplication.class

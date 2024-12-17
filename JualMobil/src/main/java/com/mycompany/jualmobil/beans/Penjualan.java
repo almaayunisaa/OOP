@@ -9,12 +9,20 @@ public class Penjualan {
     private Date tanggal;
     private double hargaJual; //new addition :D 
 
-    public Penjualan(String idPenjualan, String idSales, String idMobil, Date tangal, double hargaJual){
+    public Penjualan(String idPenjualan, String idSales, String idMobil, Date tanggal, double hargaJual){
         this.idPenjualan = idPenjualan;
         this.idSales = idSales;
         this.idMobil = idMobil;
-        this.tanggal = tangal;
+        this.tanggal = tanggal;
         this.hargaJual = hargaJual; //new addition :D 
+    }
+
+    public String getIdSales() {
+        return idSales;
+    }
+
+    public double getHargaJual() {
+        return hargaJual;
     }
 
     public String getIdPenjualan(){

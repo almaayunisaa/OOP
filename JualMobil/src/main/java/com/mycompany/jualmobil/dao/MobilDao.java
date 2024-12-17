@@ -11,49 +11,83 @@ package com.mycompany.jualmobil.dao;
 
 import java.sql.ResultSet;    
 import java.sql.SQLException;    
-import java.util.List;    
+import java.util.List;   
+import org.springframework.stereotype.Repository;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;    
 import org.springframework.jdbc.core.JdbcTemplate;    
 import org.springframework.jdbc.core.RowMapper;    
-import com.mycompany.jualmobil.beans.Mobil;    
+import com.mycompany.jualmobil.beans.Mobil;  
+import com.mycompany.jualmobil.beans.SUV;  
+import com.mycompany.jualmobil.beans.Sedan;
+import com.mycompany.jualmobil.beans.MPV;
 
 public class MobilDao {
-    JdbcTemplate template;    
+    private JdbcTemplate template;    
 
-    public void setTemplate(JdbcTemplate template) {    
+    public MobilDao(JdbcTemplate template) {    
         this.template = template;    
     }
     
-    public int saveMobil(Mobil m){    
-        String sql="insert into mob(name,salary,designation) values('"+m.getIdMobil()+"',"+m.getNama()+",'"+m.getNomorMesin()+",'"+m.getKapasitasMesin()+",'"+m.getKetersediaan()+",'"+m.getHarga()+",'"+m.getNomorRangka()+",'"+m.getOdoMeter()+",'"+m.getPlatNomor()+",'"+m.getTipe()+",'"+m.getWarna()+"')";    
-        return template.update(sql);    
+    public void tambahMobil(Mobil m){    
+        String sql="INSERT INTO mobil (idMobil, nama, nomorRangka, nomorMesin, platNomor, kapasitasMesin, ketersediaan, tipe, harga, warna, odoMeter) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";    
+        template.update(sql, m.getIdMobil(), m.getNama(), m.getNomorRangka(), m.getNomorMesin(), m.getPlatNomor(), m.getKapasitasMesin(), m.getKetersediaan(), m.getTipe(), m.getHarga(), m.getWarna(), m.getOdoMeter());    
     }    
     
-    public int updateMobil(Mobil m){    
-        String sql="update mob nama="+m.getNama()+", NoMesin="+m.getNomorMesin()+", NoRangka="+m.getNomorRangka()+", KapasitasMesin="+m.getKapasitasMesin()+", Ketersediaan="+m.getKetersediaan()+", Harga="+m.getHarga()+", OdoMeter="+m.getOdoMeter()+", PlatNomor="+m.getPlatNomor()+", Tipe="+m.getTipe()+", Warna="+m.getWarna()+"' where id="+m.getIdMobil()+"";    
-        return template.update(sql);    
+    public void ubahMobil(Mobil m){    
+        String sql="UPDATE mobil set nama =?, nomorRangka= ?, nomorMesin =?, platNomor =?, kapasitasMesin=?, ketersediaan=?, tipe=?, harga=?, warna=?, odoMeter=?)";    
+        template.update(sql, m.getNama(), m.getNomorRangka(), m.getNomorMesin(), m.getPlatNomor(), m.getKapasitasMesin(), m.getKetersediaan(), m.getTipe(), m.getHarga(), m.getWarna(), m.getOdoMeter());       
     }    
     
-    public int deleteMobil(int id){    
-        String sql="delete from mob where id="+id+"";    
-        return template.update(sql);    
+    public void hapusMobil(String idMobil){    
+        String sql="DELETE FROM mobil WHERE idMobil = ?";    
+        template.update(sql, idMobil);    
     }    
     
-    public Mobil getMobById(int id){    
-        String sql="select * from mob where id=?";    
-        return template.queryForObject(sql, new Object[]{id},new BeanPropertyRowMapper<Mobil>(Mobil.class));    
-    }    
+    public Mobil getMobById(String idMobil){    
+        String sql="SELECT * FROM mobil WHERE idMobil = ?";    
+        return template.queryForObject(sql, new Object[]{idMobil}, (rs, rowNum) -> {
+            Mobil m=null;
+            String tipe = rs.getString("tipe");
+            if ("SUV".equals(tipe)) {
+                m = new SUV(rs.getString("idMobil"), rs.getString("nama"), rs.getString("nomorRangka"), rs.getString("nomorMesin"), rs.getString("platNomor"), rs.getDouble("kapasitasMesin"), rs.getInt("ketersediaan"), rs.getDouble("harga"), rs.getString("warna"), rs.getInt("odoMeter"));
+            } else if ("MPV".equals(tipe)) {
+                m = new MPV(rs.getString("idMobil"), rs.getString("nama"), rs.getString("nomorRangka"), rs.getString("nomorMesin"), rs.getString("platNomor"), rs.getDouble("kapasitasMesin"), rs.getInt("ketersediaan"), rs.getDouble("harga"), rs.getString("warna"), rs.getInt("odoMeter"));
+            } else if ("Sedan".equals(tipe)) {
+                m = new Sedan(rs.getString("idMobil"), rs.getString("nama"), rs.getString("nomorRangka"), rs.getString("nomorMesin"), rs.getString("platNomor"), rs.getDouble("kapasitasMesin"), rs.getInt("ketersediaan"), rs.getDouble("harga"), rs.getString("warna"), rs.getInt("odoMeter"));
+            }
+            return m;
+        });    
+    }
+
+    public Mobil getMobByNama(String nama){    
+        String sql="SELECT * FROM mobil WHERE nama = ?";    
+        return template.queryForObject(sql, new Object[]{nama}, (rs, rowNum) -> {
+            Mobil m=null;
+            String tipe = rs.getString("tipe");
+            if ("SUV".equals(tipe)) {
+                m = new SUV(rs.getString("idMobil"), rs.getString("nama"), rs.getString("nomorRangka"), rs.getString("nomorMesin"), rs.getString("platNomor"), rs.getDouble("kapasitasMesin"), rs.getInt("ketersediaan"), rs.getDouble("harga"), rs.getString("warna"), rs.getInt("odoMeter"));
+            } else if ("MPV".equals(tipe)) {
+                m = new MPV(rs.getString("idMobil"), rs.getString("nama"), rs.getString("nomorRangka"), rs.getString("nomorMesin"), rs.getString("platNomor"), rs.getDouble("kapasitasMesin"), rs.getInt("ketersediaan"), rs.getDouble("harga"), rs.getString("warna"), rs.getInt("odoMeter"));
+            } else if ("Sedan".equals(tipe)) {
+                m = new Sedan(rs.getString("idMobil"), rs.getString("nama"), rs.getString("nomorRangka"), rs.getString("nomorMesin"), rs.getString("platNomor"), rs.getDouble("kapasitasMesin"), rs.getInt("ketersediaan"), rs.getDouble("harga"), rs.getString("warna"), rs.getInt("odoMeter"));
+            }
+            return m;
+        });    
+    }
     
     public List<Mobil> getMobil(){
-        return template.query("select * from mob",new RowMapper<Mobil>(){    
-            public Mobil mapRow(ResultSet rs, int row) throws SQLException {    
-                Mmobil m=new Mmobil();    //aku bingung harusnya apa
-                m.getIdMobil(rs.getString(1));    
-                m.setName(rs.getString(2));    
-                m.setSalary(rs.getFloat(3));    
-                m.setDesignation(rs.getString(4));    
-                return m;    
-            }    
+        String sql="SELECT * FROM mobil";    
+        return template.query(sql, (rs, rowNum) -> {
+            Mobil m = null;
+            String tipe = rs.getString("tipe");
+            if ("SUV".equals(tipe)) {
+                m = new SUV(rs.getString("idMobil"), rs.getString("nama"), rs.getString("nomorRangka"), rs.getString("nomorMesin"), rs.getString("platNomor"), rs.getDouble("kapasitasMesin"), rs.getInt("ketersediaan"), rs.getDouble("harga"), rs.getString("warna"), rs.getInt("odoMeter"));
+            } else if ("MPV".equals(tipe)) {
+                m = new MPV(rs.getString("idMobil"), rs.getString("nama"), rs.getString("nomorRangka"), rs.getString("nomorMesin"), rs.getString("platNomor"), rs.getDouble("kapasitasMesin"), rs.getInt("ketersediaan"), rs.getDouble("harga"), rs.getString("warna"), rs.getInt("odoMeter"));
+            } else if ("Sedan".equals(tipe)) {
+                m = new Sedan(rs.getString("idMobil"), rs.getString("nama"), rs.getString("nomorRangka"), rs.getString("nomorMesin"), rs.getString("platNomor"), rs.getDouble("kapasitasMesin"), rs.getInt("ketersediaan"), rs.getDouble("harga"), rs.getString("warna"), rs.getInt("odoMeter"));
+            }
+            return m;
         });    
     }    
 }

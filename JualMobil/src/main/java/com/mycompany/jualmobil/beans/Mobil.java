@@ -36,6 +36,46 @@ public abstract class Mobil {
 
     public abstract void setTipe(String tipe);
 
+    public void setIdMobil(String idMobil) {
+        this.idMobil = idMobil;
+    }
+
+    public void setNama(String nama) {
+        this.nama = nama;
+    }
+
+    public void setNomorRangka(String nomorRangka) {
+        this.nomorRangka = nomorRangka;
+    }
+
+    public void setNomorMesin(String nomorMesin) {
+        this.nomorMesin = nomorMesin;
+    }
+
+    public void setPlatNomor(String platNomor) {
+        this.platNomor = platNomor;
+    }
+
+    public void setKapasitasMesin(double kapasitasMesin) {
+        this.kapasitasMesin = kapasitasMesin;
+    }
+
+    public void setKetersediaan(int ketersediaan) {
+        this.ketersediaan = ketersediaan;
+    }
+
+    public void setHarga(double harga) {
+        this.harga = harga;
+    }
+
+    public void setWarna(String warna) {
+        this.warna = warna;
+    }
+
+    public void setOdoMeter(int odoMeter) {
+        this.odoMeter = odoMeter;
+    }
+
     public String getIdMobil() {
         return idMobil;
     }
