@@ -70,14 +70,17 @@
 <body>
     <div class="login-container">
         <div class="logo">
-                <img src="src" width="20px" height="20px" alt="alt"/>
-            </div>
+            <img src="src" width="20px" height="20px" alt="Logo"/>
+        </div>
         <div class="login-text">
             <h2>Login Sales</h2>
         </div>
-        <input type="text" placeholder="Username" />
-        <input type="password" placeholder="Password" />
-        <button href="Homepage_Sales.jsp" type="submit">Login</button>
+        <!-- Form login dengan method POST -->
+        <form action="Homepage_Sales.jsp" method="POST">
+            <input type="text" name="username" placeholder="Username" required />
+            <input type="password" name="password" placeholder="Password" required />
+            <button type="submit">Login</button>
+        </form>
     </div>
 </body>
 </html>
