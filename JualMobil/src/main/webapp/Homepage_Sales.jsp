@@ -126,7 +126,7 @@
 
             .form-input:focus{
                 box-shadow: none;
-                border: none;
+                border: none;
             }
             
             .form-control{
@@ -283,6 +283,16 @@
             .left-column span, .right-column span {
                 font-weight: bold;
                 color: #000; /* Make text bold and black */
+            }
+
+            .custom-modal-size{
+                max-width: 100%;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+            }
+            .modal-content {
+                width: 900px;
             }
         </style>
     </head>
@@ -486,7 +496,7 @@
                 </div>
                 <!-- Modal -->
                 <div class="modal fade" id="carModal" tabindex="-1" aria-labelledby="carModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
+                    <div class="modal-dialog custom-modal-size">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="carModalLabel">Detail Mobil</h5>
@@ -494,6 +504,57 @@
                             </div>
                             <div class="modal-body">
                                 <img id="modalImage" src="" alt="Car Image" class="img-fluid mb-3">
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <label for="exampleFormControlTextarea1" class="form-label">ID Mobil</label>
+                                        <input type="text" class="form-control"  value=" XXX" aria-label="Disabled input example" disabled readonly>
+                                    </div>
+                                    <div class="col">
+                                        <label for="exampleFormControlTextarea1" class="form-label">Nama Mobil</label>
+                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example" disabled readonly>
+                                    </div>
+                                    <div class="col">
+                                        <label for="exampleFormControlTextarea1" class="form-label">Type</label>
+                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example" disabled readonly>
+                                    </div>
+                                    <div class="col">
+                                        <label for="exampleFormControlTextarea1" class="form-label">Warna Mobil</label>
+                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example" disabled readonly>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <label for="exampleFormControlTextarea1" class="form-label">Plat Nomor</label>
+                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example" disabled readonly>
+                                    </div>
+                                    <div class="col">
+                                        <label for="exampleFormControlTextarea1" class="form-label">Odometer</label>
+                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example" disabled readonly>
+                                    </div>
+                                    <div class="col">
+                                        <label for="exampleFormControlTextarea1" class="form-label">Kapasitas Mesin</label>
+                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example" disabled readonly>
+                                    </div>
+                                    <div class="col">
+                                        <label for="exampleFormControlTextarea1" class="form-label">Ketersediaan</label>
+                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example" disabled readonly>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <label for="exampleFormControlTextarea1" class="form-label">Nomor Rangka</label>
+                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example" disabled readonly>
+                                    </div>
+                                    <div class="col">
+                                        <label for="exampleFormControlTextarea1" class="form-label">Nomor Mesin</label>
+                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example" disabled readonly>
+                                    </div>
+                                    <div class="col">
+                                        <label for="exampleFormControlTextarea1" class="form-label">Harga</label>
+                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example" disabled readonly>
+                                    </div>
+                                </div>
+                                <!-- <img id="modalImage" src="" alt="Car Image" class="img-fluid mb-3">
                                 <h3 id="modalName"></h3>
                                 <p><strong>Type:</strong> <span id="modalType"></span></p>
                                 <p><strong>Warna:</strong> <span id="modalColor"></span></p>
@@ -504,7 +565,7 @@
                                 <p><strong>Nomor Rangka:</strong> <span id="modalChassisNumber"></span></p>
                                 <p><strong>Nomor Mesin:</strong> <span id="modalEngineNumber"></span></p>
                                 <p><strong>Harga Sewa:</strong> <span id="modalPrice"></span></p>
-                                <p><strong>ID Mobil:</strong> <span id="modalID"></span></p>
+                                <p><strong>ID Mobil:</strong> <span id="modalID"></span></p> -->
                             </div>
                         </div>
                     </div>
