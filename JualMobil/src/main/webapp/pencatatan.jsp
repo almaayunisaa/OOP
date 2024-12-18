@@ -353,10 +353,17 @@
             
             .custom-textarea {
                 background-color: #e7eef7;
-                border: 1px solid #ddd;
-                height: 200px;
-                resize: none;
-            }
+                border-color: #d5dfeb;
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    white-space: pre-line;  /* Mempertahankan spasi dan baris baru */
+    pointer-events: none;   /* Menonaktifkan interaksi dengan textarea */
+    overflow-y: scroll;     /* Menambahkan scrollbar vertikal saat konten melebihi tinggi */
+    resize: none;           /* Menonaktifkan resize (ukuran ulang) */
+}
             .btn-primary {
                 background-color: #3b72c5;
                 border: none;
