@@ -36,7 +36,7 @@ public class MobilDao {
 
     
     public void tambahMobil(Mobil m) {   
-         if (m == null) {
+        if (m == null) {
             throw new IllegalArgumentException("Mobil tidak boleh null");
         }
         String sql="INSERT INTO mobil (idMobil, nama, nomorRangka, nomorMesin, platNomor, kapasitasMesin, ketersediaan, tipe, harga, warna, odoMeter) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";    
@@ -60,9 +60,11 @@ public class MobilDao {
     }    
     
     public void ubahMobil(Mobil m){    
-        String sql="UPDATE mobil set nama =?, nomorRangka= ?, nomorMesin =?, platNomor =?, kapasitasMesin=?, ketersediaan=?, tipe=?, harga=?, warna=?, odoMeter=? WHERE idMobil=?)";    
-        try (
-            PreparedStatement stmt = conn.prepareStatement(sql)) {
+        String sql = "UPDATE mobil SET nama = ?, nomorRangka = ?, nomorMesin = ?, platNomor = ?, kapasitasMesin = ?, ketersediaan = ?, tipe = ?, harga = ?, warna = ?, odoMeter = ? WHERE idMobil = ?";
+        if (m == null) {
+            throw new IllegalArgumentException("Mobil tidak boleh null");
+        }
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, m.getNama());
             stmt.setString(2, m.getNomorRangka());
             stmt.setString(3, m.getNomorMesin());
@@ -75,6 +77,7 @@ public class MobilDao {
             stmt.setInt(10, m.getOdoMeter());
             stmt.setString(11, m.getIdMobil());
             stmt.executeUpdate();
+            conn.commit();
         } catch (SQLException e) {
             e.printStackTrace();
         }

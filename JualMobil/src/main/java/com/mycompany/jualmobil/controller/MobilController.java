@@ -44,14 +44,14 @@ public class MobilController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
-        if (action==null || action.isEmpty() || "tampil".equals(action)) {
+        if ("tampil".equals(action)) {
             try {
                 tampilMobil(request, response);
             } catch (SQLException ex) {
                 Logger.getLogger(MobilController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } else if ("edit".equals(action)) {
-            ubahMobil(request, response);
+        } else if ("getMobil".equals(action)) {
+            getMobil(request, response);
         }
     } 
     
@@ -62,6 +62,8 @@ public class MobilController extends HttpServlet {
             tambahMobil(request, response);
         } else if ("delete".equals(action)) {
             hapusMobil(request, response);
+        } else if ("edit".equals(action)) {
+            ubahMobil(request, response);
         }
     } 
     
@@ -69,14 +71,36 @@ public class MobilController extends HttpServlet {
         List<Mobil> daftarMobil = mobilDao.getMobil();
         request.setAttribute("daftarMobil", daftarMobil);
         
-        request.getRequestDispatcher("produk.jsp").forward(request, response); // diubah "" nya
+        request.getRequestDispatcher("produk.jsp").forward(request, response);
     } 
     
     private void ubahMobil(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String id = request.getPathInfo().split("/")[2];
-        Mobil m = mobilDao.getMobById(id);
-        request.setAttribute("mobil", m);
-        request.getRequestDispatcher("/").forward(request, response); //diubah "" nya
+        String id = request.getParameter("idMobil_edit"); 
+        String nama = request.getParameter("nama_edit");
+        String nomorRangka = request.getParameter("nomorRangka_edit");
+        String nomorMesin = request.getParameter("nomorMesin_edit");
+        String platNomor = request.getParameter("platNomor_edit");
+        double kapasitasMesin = Double.parseDouble(request.getParameter("kapasitasMesin_edit"));
+        int ketersediaan = Integer.parseInt(request.getParameter("ketersediaan_edit"));
+        String tipe = request.getParameter("tipeMobil_edit");
+        double harga = Double.parseDouble(request.getParameter("harga_edit"));
+        String warna  = request.getParameter("warnaMobil_edit");
+        int odoMeter = Integer.parseInt(request.getParameter("odoMeter_edit"));
+        Mobil m = null;
+        
+        if ("SUV".equals(tipe)) {
+            m = new SUV(id, nama, nomorRangka, nomorMesin, platNomor, kapasitasMesin, ketersediaan, harga, warna, odoMeter);
+            m.setTipe(tipe);
+        } else if ("MPV".equals(tipe)) {
+            m = new MPV(id, nama, nomorRangka, nomorMesin, platNomor, kapasitasMesin, ketersediaan, harga, warna, odoMeter);
+            m.setTipe(tipe);
+        } else if ("Sedan".equals(tipe)) {
+            m = new Sedan(id, nama, nomorRangka, nomorMesin, platNomor, kapasitasMesin, ketersediaan, harga, warna, odoMeter);
+            m.setTipe(tipe);
+        }
+        
+        mobilDao.ubahMobil(m);
+        response.sendRedirect("mobilController?action=tampil");
     } 
     
     private void hapusMobil(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -114,4 +138,11 @@ public class MobilController extends HttpServlet {
         mobilDao.tambahMobil(m);
         response.sendRedirect("mobilController?action=tampil");
     }
+    
+    private void getMobil(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String id = request.getParameter("idMobil"); 
+        request.setAttribute("mobil", mobilDao.getMobById(id));
+        request.setAttribute("popUpEdit", true); 
+        request.getRequestDispatcher("mobilController?action=tampil").forward(request, response);
+    } 
 }

@@ -550,12 +550,16 @@
                                         <td class="vertical-middle"><%=mobil.getKetersediaan() %></td>
                                         <td>
                                             <!-- Edit Button -->
-                                            <button type="button" class="btn custom-action-btn" data-bs-toggle="modal" data-bs-target="#editModal"  data-id="<%=mobil.getIdMobil() %>">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M5 19H6.425L16.2 9.225L14.775 7.8L5 17.575V19ZM3 21L3 16.75L16.2 3.575C16.4 3.39167 16.621 3.25 16.863 3.15C17.105 3.05 17.359 3 17.625 3C17.891 3 18.1493 3.05 18.4 3.15C18.6507 3.25 18.8673 3.4 19.05 3.6L20.425 5C20.625 5.18333 20.771 5.4 20.863 5.65C20.955 5.9 21.0007 6.15 21 6.4C21 6.66667 20.9543 6.921 20.863 7.163C20.7717 7.405 20.6257 7.62567 20.425 7.825L7.25 21H3ZM15.475 8.525L14.775 7.8L16.2 9.225L15.475 8.525Z" fill="#939393"/>
+                                            <form action="mobilController" method="get">
+                                                <input type="hidden" name="action" value="getMobil">
+                                                <input type="hidden" name="idMobil" value="<%= mobil.getIdMobil() %>">
+                                                <button type="submit" class="btn custom-action-btn" data-bs-toggle="modal" data-bs-target="#editModal">
+                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M5 19H6.425L16.2 9.225L14.775 7.8L5 17.575V19ZM3 21L3 16.75L16.2 3.575C16.4 3.39167 16.621 3.25 16.863 3.15C17.105 3.05 17.359 3 17.625 3C17.891 3 18.1493 3.05 18.4 3.15C18.6507 3.25 18.8673 3.4 19.05 3.6L20.425 5C20.625 5.18333 20.771 5.4 20.863 5.65C20.955 5.9 21.0007 6.15 21 6.4C21 6.66667 20.9543 6.921 20.863 7.163C20.7717 7.405 20.6257 7.62567 20.425 7.825L7.25 21H3ZM15.475 8.525L14.775 7.8L16.2 9.225L15.475 8.525Z" fill="#939393"/>
                                                     </svg>                                                
-                                                Edit
-                                            </button>
+                                                    Edit
+                                                </button>
+                                            
                                             <!-- Delete Button -->
                                             <form action="mobilController" method="post" style="display:inline;">
                                                 <input type="hidden" name="action" value="delete">
@@ -614,7 +618,6 @@
                                     <div class="col">
                                         <label for="tipeMobil" class="form-label">Type</label>
                                         <select class="form-control"  name="tipeMobil" id="tipeMobil" required>
-                                            <option value="">-- Pilih Tipe --</option>
                                             <option value="SUV">SUV</option>
                                             <option value="MPV">MPV</option>
                                             <option value="Sedan">Sedan</option>
@@ -676,13 +679,22 @@
                                 <p><strong>Harga Sewa:</strong> <span id="modalPrice"></span></p>
                                 <p><strong>ID Mobil:</strong> <span id="modalID"></span></p> -->
                             </div>
+                            </form>
                         </div>
                     </div>
                 </div>
+                <%
+                    Mobil mobil = (Mobil) request.getAttribute("mobil");
+                    Boolean popUpEdit = (Boolean) request.getAttribute("popUpEdit");
+                %>
                 <!--  Edit Modal -->
-                <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true" 
+                    <%if (Boolean.TRUE.equals(popUpEdit)) {%> aria-modal="true" role="dialog" <% } %>>
                     <div class="modal-dialog custom-modal-size">
                         <div class="modal-content">
+                            <form action="mobilController" method="post">
+                            <input type="hidden" name="action" value="edit">
+                            <input type="hidden" name="idMobil" value="${mobil.idMobil}">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="carModalLabel">Edit Produk</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -702,58 +714,64 @@
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col">
-                                        <label for="exampleFormControlTextarea1" class="form-label">ID Mobil</label>
-                                        <input type="text" class="form-control"  value=" XXX" aria-label="Disabled input example" >
+                                        <label for="idMobil_edit" class="form-label">ID Mobil</label>
+                                        <input type="text" class="form-control"  value="${mobil.idMobil}" aria-label="Disabled input example" name="idMobil_edit" id="idMobil_edit" readonly>
                                     </div>
                                     <div class="col">
-                                        <label for="exampleFormControlTextarea1" class="form-label">Nama Mobil</label>
-                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example"   >
+                                        <label for="nama_edit" class="form-label">Nama Mobil</label>
+                                        <input type="text" class="form-control"   value=" ${mobil.nama}" aria-label="Disabled input example" name="nama_edit" id="nama_edit" required>
                                     </div>
                                     <div class="col">
-                                        <label for="exampleFormControlTextarea1" class="form-label">Type</label>
-                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example"   >
+                                        <label for="tipeMobil_edit" class="form-label">Type</label>
+                                        <select class="form-control"  name="tipeMobil_edit" id="tipeMobil_edit" required>
+                                            <option value="" >-- Pilih Tipe --</option>
+                                            <option value="SUV">SUV</option>
+                                            <option value="MPV">MPV</option>
+                                            <option value="Sedan">Sedan</option>
+                                        </select>
                                     </div>
                                     <div class="col">
-                                        <label for="exampleFormControlTextarea1" class="form-label">Warna Mobil</label>
-                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example"   >
+                                        <label for="warnaMobil_edit" class="form-label">Warna Mobil</label>
+                                        <input type="text" class="form-control"   value="${mobil.warna}" aria-label="Disabled input example" name="warnaMobil_edit" id="warnaMobil_edit" required>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col">
-                                        <label for="exampleFormControlTextarea1" class="form-label">Plat Nomor</label>
-                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example"   >
+                                        <label for="platNomor_edit" class="form-label">Plat Nomor</label>
+                                        <input type="text" class="form-control"   value="${mobil.platNomor}" aria-label="Disabled input example" name="platNomor_edit" id="platNomor_edit" required>
                                     </div>
                                     <div class="col">
-                                        <label for="exampleFormControlTextarea1" class="form-label">Odometer</label>
-                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example"   >
+                                        <label for="odoMeter_edit" class="form-label">Odometer</label>
+                                        <input type="text" class="form-control"   value="${mobil.odoMeter}" aria-label="Disabled input example" name="odoMeter_edit" id="odoMeter_edit" required>
                                     </div>
                                     <div class="col">
-                                        <label for="exampleFormControlTextarea1" class="form-label">Kapasitas Mesin</label>
-                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example"   >
+                                        <label for="kapasitasMesin_edit" class="form-label">Kapasitas Mesin</label>
+                                        <input type="text" class="form-control"   value="${mobil.kapasitasMesin}" aria-label="Disabled input example" name="kapasitasMesin_edit" id="kapasitasMesin_edit" required>
                                     </div>
                                     <div class="col">
-                                        <label for="exampleFormControlTextarea1" class="form-label">Ketersediaan</label>
-                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example"   >
+                                        <label for="ketersediaan_edit" class="form-label">Ketersediaan</label>
+                                        <input type="text" class="form-control"   value="${mobil.ketersediaan}" aria-label="Disabled input example" name="ketersediaan_edit" id="ketersediaan_edit" required>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-4">
-                                        <label for="exampleFormControlTextarea1" class="form-label">Nomor Rangka</label>
-                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example"   >
+                                        <label for="nomorRangka_edit" class="form-label">Nomor Rangka</label>
+                                        <input type="text" class="form-control"   value="${mobil.nomorRangka}" aria-label="Disabled input example" name="nomorRangka_edit" id="nomorRangka_edit" required>
                                     </div>
                                     <div class="col-4">
-                                        <label for="exampleFormControlTextarea1" class="form-label">Nomor Mesin</label>
-                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example"   >
+                                        <label for="nomorMesin_edit" class="form-label">Nomor Mesin</label>
+                                        <input type="text" class="form-control"   value="${mobil.nomorMesin}" aria-label="Disabled input example" name="nomorMesin_edit" id="nomorMesin_edit" required>
                                     </div>
                                     <div class="col-3">
-                                        <label for="exampleFormControlTextarea1" class="form-label">Harga</label>
-                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example"   >
+                                        <label for="harga_edit" class="form-label">Harga</label>
+                                        <input type="text" class="form-control"   value="<%=String.format("%.0f", mobil.getHarga())%>" aria-label="Disabled input example" name="harga_edit" id="harga_edit" required>
                                     </div>
                                     <div class="col-1">
                                         <label for="exampleFormControlTextarea1" class="form-label"></label>
-                                        <button type="button" class="btn btn-primary">Edit</button>
+                                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
                                     </div>
                                 </div>
+
                                 <!-- <img id="modalImage" src="" alt="Car Image" class="img-fluid mb-3">
                                 <h3 id="modalName"></h3>
                                 <p><strong>Type:</strong> <span id="modalType"></span></p>
@@ -767,9 +785,17 @@
                                 <p><strong>Harga Sewa:</strong> <span id="modalPrice"></span></p>
                                 <p><strong>ID Mobil:</strong> <span id="modalID"></span></p> -->
                             </div>
+                            
+                            </form>
                         </div>
                     </div>
                 </div>
+                <% if (Boolean.TRUE.equals(popUpEdit)) { %>
+                <script>
+                    var popUpEdit = new bootstrap.Modal(document.getElementById('editModal'), {});
+                    popUpEdit.show();
+                </script>
+                <% } %>
             </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
