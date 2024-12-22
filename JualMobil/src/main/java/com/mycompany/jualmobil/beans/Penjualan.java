@@ -15,7 +15,7 @@ public class Penjualan {
         this.idMobil = idMobil;
         this.tanggal = tanggal;
         this.hargaJual = hargaJual; //new addition :D 
-    }
+    }  
 
     public String getIdSales() {
         return idSales;

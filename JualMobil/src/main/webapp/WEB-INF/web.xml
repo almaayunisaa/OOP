@@ -8,4 +8,12 @@
             30
         </session-timeout>
     </session-config>
+    <servlet>
+        <servlet-name>MobilController</servlet-name>
+        <servlet-class>com.mycompany.jualmobil.controller.MobilController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MobilController</servlet-name>
+        <url-pattern>/mobilController</url-pattern>
+    </servlet-mapping>
 </web-app>

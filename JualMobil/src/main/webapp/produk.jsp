@@ -1,4 +1,8 @@
+<%@page import="com.mycompany.jualmobil.dao.MobilDao"%>
+<%@page import="java.util.List"%>
+<%@page import="com.mycompany.jualmobil.beans.Mobil"%>
 <!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -124,7 +128,7 @@
 
             .form-input:focus{
                 box-shadow: none;
-                border: none;
+              Â Â border: none;
             }
             
             .form-control{
@@ -530,108 +534,46 @@
                             </thead>
                         </table>
                         <div class="scrollable-section">
-                            <table>
+                            <table>      
                                 <tbody>
+                                    <%
+                                         List<Mobil> daftarMobil = (List<Mobil>) request.getAttribute("daftarMobil");
+                                        
+                                        if (daftarMobil!=null) {
+                                            for (Mobil mobil : daftarMobil) {
+                                    %>
+                                    
                                     <tr>
                                         <td><img src="https://via.placeholder.com/120x80" class="car-img" alt="Mobil"></td>
-                                        <td class="vertical-middle">sedanSI0133</td>
-                                        <td class="vertical-middle">355.000.000</td>
-                                        <td class="vertical-middle">100</td>
+                                        <td class="vertical-middle"><%=mobil.getNama() %></td>
+                                        <td class="vertical-middle">Rp <%= String.format("%,.2f", mobil.getHarga()) %></td>
+                                        <td class="vertical-middle"><%=mobil.getKetersediaan() %></td>
                                         <td>
-                                            <button type="button" class="btn custom-action-btn" data-bs-toggle="modal" data-bs-target="#editModal">
+                                            <!-- Edit Button -->
+                                            <button type="button" class="btn custom-action-btn" data-bs-toggle="modal" data-bs-target="#editModal"  data-id="<%=mobil.getIdMobil() %>">
                                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M5 19H6.425L16.2 9.225L14.775 7.8L5 17.575V19ZM3 21L3 16.75L16.2 3.575C16.4 3.39167 16.621 3.25 16.863 3.15C17.105 3.05 17.359 3 17.625 3C17.891 3 18.1493 3.05 18.4 3.15C18.6507 3.25 18.8673 3.4 19.05 3.6L20.425 5C20.625 5.18333 20.771 5.4 20.863 5.65C20.955 5.9 21.0007 6.15 21 6.4C21 6.66667 20.9543 6.921 20.863 7.163C20.7717 7.405 20.6257 7.62567 20.425 7.825L7.25 21H3ZM15.475 8.525L14.775 7.8L16.2 9.225L15.475 8.525Z" fill="#939393"/>
                                                     </svg>                                                
                                                 Edit
                                             </button>
-                                            <button type="button" class="btn custom-action-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                <svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3 18C2.45 18 1.97933 17.8043 1.588 17.413C1.19667 17.0217 1.00067 16.5507 1 16V3H0V1H5V0H11V1H16V3H15V16C15 16.55 14.8043 17.021 14.413 17.413C14.0217 17.805 13.5507 18.0007 13 18H3ZM13 3H3V16H13V3ZM5 14H7V5H5V14ZM9 14H11V5H9V14Z" fill="#939393"/>
+                                            <!-- Delete Button -->
+                                            <form action="mobilController" method="post" style="display:inline;">
+                                                <input type="hidden" name="action" value="delete">
+                                                <input type="hidden" name="id" value="<%= mobil.getIdMobil() %>">
+                                                <button type="submit" class="btn custom-action-btn" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="<%=mobil.getIdMobil() %>" >
+                                                    <svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M3 18C2.45 18 1.97933 17.8043 1.588 17.413C1.19667 17.0217 1.00067 16.5507 1 16V3H0V1H5V0H11V1H16V3H15V16C15 16.55 14.8043 17.021 14.413 17.413C14.0217 17.805 13.5507 18.0007 13 18H3ZM13 3H3V16H13V3ZM5 14H7V5H5V14ZM9 14H11V5H9V14Z" fill="#939393"/>
                                                     </svg>                                                
-                                                Delete
-                                            </button>
+                                                    Delete
+                                                </button>
+                                            </form>
+                                           
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td><img src="https://via.placeholder.com/120x80" class="car-img" alt="Mobil"></td>
-                                        <td class="vertical-middle">sedanSI0133</td>
-                                        <td class="vertical-middle">355.000.000</td>
-                                        <td class="vertical-middle">100</td>
-                                        <td>
-                                            <button type="button" class="btn custom-action-btn" data-bs-toggle="modal" data-bs-target="#editModal">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M5 19H6.425L16.2 9.225L14.775 7.8L5 17.575V19ZM3 21L3 16.75L16.2 3.575C16.4 3.39167 16.621 3.25 16.863 3.15C17.105 3.05 17.359 3 17.625 3C17.891 3 18.1493 3.05 18.4 3.15C18.6507 3.25 18.8673 3.4 19.05 3.6L20.425 5C20.625 5.18333 20.771 5.4 20.863 5.65C20.955 5.9 21.0007 6.15 21 6.4C21 6.66667 20.9543 6.921 20.863 7.163C20.7717 7.405 20.6257 7.62567 20.425 7.825L7.25 21H3ZM15.475 8.525L14.775 7.8L16.2 9.225L15.475 8.525Z" fill="#939393"/>
-                                                    </svg>                                                
-                                                Edit
-                                            </button>
-                                            <button type="button" class="btn custom-action-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                <svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3 18C2.45 18 1.97933 17.8043 1.588 17.413C1.19667 17.0217 1.00067 16.5507 1 16V3H0V1H5V0H11V1H16V3H15V16C15 16.55 14.8043 17.021 14.413 17.413C14.0217 17.805 13.5507 18.0007 13 18H3ZM13 3H3V16H13V3ZM5 14H7V5H5V14ZM9 14H11V5H9V14Z" fill="#939393"/>
-                                                    </svg>                                                
-                                                Delete
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><img src="https://via.placeholder.com/120x80" class="car-img" alt="Mobil"></td>
-                                        <td class="vertical-middle">sedanSI0133</td>
-                                        <td class="vertical-middle">355.000.000</td>
-                                        <td class="vertical-middle">100</td>
-                                        <td>
-                                            <button type="button" class="btn custom-action-btn" data-bs-toggle="modal" data-bs-target="#editModal">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M5 19H6.425L16.2 9.225L14.775 7.8L5 17.575V19ZM3 21L3 16.75L16.2 3.575C16.4 3.39167 16.621 3.25 16.863 3.15C17.105 3.05 17.359 3 17.625 3C17.891 3 18.1493 3.05 18.4 3.15C18.6507 3.25 18.8673 3.4 19.05 3.6L20.425 5C20.625 5.18333 20.771 5.4 20.863 5.65C20.955 5.9 21.0007 6.15 21 6.4C21 6.66667 20.9543 6.921 20.863 7.163C20.7717 7.405 20.6257 7.62567 20.425 7.825L7.25 21H3ZM15.475 8.525L14.775 7.8L16.2 9.225L15.475 8.525Z" fill="#939393"/>
-                                                    </svg>                                                
-                                                Edit
-                                            </button>
-                                            <button type="button" class="btn custom-action-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                <svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3 18C2.45 18 1.97933 17.8043 1.588 17.413C1.19667 17.0217 1.00067 16.5507 1 16V3H0V1H5V0H11V1H16V3H15V16C15 16.55 14.8043 17.021 14.413 17.413C14.0217 17.805 13.5507 18.0007 13 18H3ZM13 3H3V16H13V3ZM5 14H7V5H5V14ZM9 14H11V5H9V14Z" fill="#939393"/>
-                                                    </svg>                                                
-                                                Delete
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><img src="https://via.placeholder.com/120x80" class="car-img" alt="Mobil"></td>
-                                        <td class="vertical-middle">sedanSI0133</td>
-                                        <td class="vertical-middle">355.000.000</td>
-                                        <td class="vertical-middle">100</td>
-                                        <td>
-                                            <button type="button" class="btn custom-action-btn" data-bs-toggle="modal" data-bs-target="#editModal">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M5 19H6.425L16.2 9.225L14.775 7.8L5 17.575V19ZM3 21L3 16.75L16.2 3.575C16.4 3.39167 16.621 3.25 16.863 3.15C17.105 3.05 17.359 3 17.625 3C17.891 3 18.1493 3.05 18.4 3.15C18.6507 3.25 18.8673 3.4 19.05 3.6L20.425 5C20.625 5.18333 20.771 5.4 20.863 5.65C20.955 5.9 21.0007 6.15 21 6.4C21 6.66667 20.9543 6.921 20.863 7.163C20.7717 7.405 20.6257 7.62567 20.425 7.825L7.25 21H3ZM15.475 8.525L14.775 7.8L16.2 9.225L15.475 8.525Z" fill="#939393"/>
-                                                    </svg>                                                
-                                                Edit
-                                            </button>
-                                            <button type="button" class="btn custom-action-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                <svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3 18C2.45 18 1.97933 17.8043 1.588 17.413C1.19667 17.0217 1.00067 16.5507 1 16V3H0V1H5V0H11V1H16V3H15V16C15 16.55 14.8043 17.021 14.413 17.413C14.0217 17.805 13.5507 18.0007 13 18H3ZM13 3H3V16H13V3ZM5 14H7V5H5V14ZM9 14H11V5H9V14Z" fill="#939393"/>
-                                                    </svg>                                                
-                                                Delete
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><img src="https://via.placeholder.com/120x80" class="car-img" alt="Mobil"></td>
-                                        <td class="vertical-middle">sedanSI0133</td>
-                                        <td class="vertical-middle">355.000.000</td>
-                                        <td class="vertical-middle">100</td>
-                                        <td>
-                                            <button type="button" class="btn custom-action-btn" data-bs-toggle="modal" data-bs-target="#editModal">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M5 19H6.425L16.2 9.225L14.775 7.8L5 17.575V19ZM3 21L3 16.75L16.2 3.575C16.4 3.39167 16.621 3.25 16.863 3.15C17.105 3.05 17.359 3 17.625 3C17.891 3 18.1493 3.05 18.4 3.15C18.6507 3.25 18.8673 3.4 19.05 3.6L20.425 5C20.625 5.18333 20.771 5.4 20.863 5.65C20.955 5.9 21.0007 6.15 21 6.4C21 6.66667 20.9543 6.921 20.863 7.163C20.7717 7.405 20.6257 7.62567 20.425 7.825L7.25 21H3ZM15.475 8.525L14.775 7.8L16.2 9.225L15.475 8.525Z" fill="#939393"/>
-                                                    </svg>                                                
-                                                Edit
-                                            </button>
-                                            <button type="button" class="btn custom-action-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                <svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3 18C2.45 18 1.97933 17.8043 1.588 17.413C1.19667 17.0217 1.00067 16.5507 1 16V3H0V1H5V0H11V1H16V3H15V16C15 16.55 14.8043 17.021 14.413 17.413C14.0217 17.805 13.5507 18.0007 13 18H3ZM13 3H3V16H13V3ZM5 14H7V5H5V14ZM9 14H11V5H9V14Z" fill="#939393"/>
-                                                    </svg>                                                
-                                                Delete
-                                            </button>
-                                        </td>
-                                    </tr>
+                                    <%
+                                            }
+                                        }
+                                    %>
                                 </tbody>
                             </table>
                         </div>
@@ -641,6 +583,8 @@
                 <div class="modal fade" id="tambahModal" tabindex="-1" aria-labelledby="tambahModalLabel" aria-hidden="true">
                     <div class="modal-dialog custom-modal-size">
                         <div class="modal-content">
+                            <form action="mobilController" method="post">
+                            <input type="hidden" name="action" value="tambah">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="carModalLabel">Tambah Produk</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -660,58 +604,65 @@
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col">
-                                        <label for="exampleFormControlTextarea1" class="form-label">ID Mobil</label>
-                                        <input type="text" class="form-control"  value=" XXX" aria-label="Disabled input example" >
+                                        <label for="idMobil" class="form-label">ID Mobil</label>
+                                        <input type="text" class="form-control"  value=" XXX" aria-label="Disabled input example" name="idMobil" id="idMobil" required>
                                     </div>
                                     <div class="col">
-                                        <label for="exampleFormControlTextarea1" class="form-label">Nama Mobil</label>
-                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example"   >
+                                        <label for="nama" class="form-label">Nama Mobil</label>
+                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example" name="namaMobil" id="namaMobil" required>
                                     </div>
                                     <div class="col">
-                                        <label for="exampleFormControlTextarea1" class="form-label">Type</label>
-                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example"   >
+                                        <label for="tipeMobil" class="form-label">Type</label>
+                                        <select class="form-control"  name="tipeMobil" id="tipeMobil" required>
+                                            <option value="">-- Pilih Tipe --</option>
+                                            <option value="SUV">SUV</option>
+                                            <option value="MPV">MPV</option>
+                                            <option value="Sedan">Sedan</option>
+                                        </select>
                                     </div>
                                     <div class="col">
-                                        <label for="exampleFormControlTextarea1" class="form-label">Warna Mobil</label>
-                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example"   >
+                                        <label for="warnaMobil" class="form-label">Warna Mobil</label>
+                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example" name="warnaMobil" id="warnaMobil" required>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col">
-                                        <label for="exampleFormControlTextarea1" class="form-label">Plat Nomor</label>
-                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example"   >
+                                        <label for="platNomor" class="form-label">Plat Nomor</label>
+                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example" name="platNomor" id="platNomor" required>
                                     </div>
                                     <div class="col">
-                                        <label for="exampleFormControlTextarea1" class="form-label">Odometer</label>
-                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example"   >
+                                        <label for="odoMeter" class="form-label">Odometer</label>
+                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example" name="odoMeter" id="odoMeter" required>
                                     </div>
                                     <div class="col">
-                                        <label for="exampleFormControlTextarea1" class="form-label">Kapasitas Mesin</label>
-                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example"   >
+                                        <label for="kapasitasMesin" class="form-label">Kapasitas Mesin</label>
+                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example" name="kapasitasMesin" id="kapasitasMesin" required>
                                     </div>
                                     <div class="col">
-                                        <label for="exampleFormControlTextarea1" class="form-label">Ketersediaan</label>
-                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example"   >
+                                        <label for="ketersediaan" class="form-label">Ketersediaan</label>
+                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example" name="ketersediaan" id="ketersediaan" required>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-4">
-                                        <label for="exampleFormControlTextarea1" class="form-label">Nomor Rangka</label>
-                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example"   >
+                                        <label for="nomorRangka" class="form-label">Nomor Rangka</label>
+                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example" name="nomorRangka" id="nomorRangka" required>
                                     </div>
                                     <div class="col-4">
-                                        <label for="exampleFormControlTextarea1" class="form-label">Nomor Mesin</label>
-                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example"   >
+                                        <label for="nomorMesin" class="form-label">Nomor Mesin</label>
+                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example" name="nomorMesin" id="nomorMesin" required>
                                     </div>
                                     <div class="col-3">
-                                        <label for="exampleFormControlTextarea1" class="form-label">Harga</label>
-                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example"   >
+                                        <label for="harga" class="form-label">Harga</label>
+                                        <input type="text" class="form-control"   value=" XXX" aria-label="Disabled input example" name="harga" id="harga" required>
                                     </div>
                                     <div class="col-1">
                                         <label for="exampleFormControlTextarea1" class="form-label"></label>
-                                        <button type="button" class="btn btn-primary">OK</button>
+                                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
                                     </div>
                                 </div>
+                               
+
                                 <!-- <img id="modalImage" src="" alt="Car Image" class="img-fluid mb-3">
                                 <h3 id="modalName"></h3>
                                 <p><strong>Type:</strong> <span id="modalType"></span></p>

@@ -9,35 +9,45 @@ package com.mycompany.jualmobil.dao;
  * @author Alma
  */
 
-import java.sql.ResultSet;    
-import java.sql.SQLException;    
-import java.util.List;   
-import org.springframework.stereotype.Repository;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;    
-import org.springframework.jdbc.core.JdbcTemplate;    
-import org.springframework.jdbc.core.RowMapper;
+import java.sql.*; 
 import com.mycompany.jualmobil.beans.Petugas;  
 
 public class PetugasDao {
-    private JdbcTemplate template;    
+    private final String path = "jdbc:mysql://localhost:3306/db_mobil"; 
+    private final String user = "root";
+    private final  String password = "Alma2004!";
 
-    public PetugasDao(JdbcTemplate template) {    
-        this.template = template;    
+    private Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(path, user, password);
     }
     
     public void tambahPetugas(Petugas s){    
         String sql="INSERT INTO user (id, role, nama, username, password) VALUES (?, ?, ?, ?, ?)";    
-        template.update(sql, s.getClass(), "Petugas", s.getNama(), s.getUsername(), s.getPassword());    
+        try (Connection conn = getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, s.getIdPetugas());
+            stmt.setString(2, "Petugas");
+            stmt.setString(3, s.getNama());
+            stmt.setString(4, s.getUsername());
+            stmt.setString(5, s.getPassword());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }   
     }       
 
     public Petugas getUserbyUsn(String username){    
         String sql="SELECT * FROM user WHERE username = ?";    
-        return template.queryForObject(sql, new Object[]{username}, (rs, rowNum) -> {
-            Petugas p = null;
-            if ("Petugas".equals(rs.getString("role"))) {
-                p=new Petugas(rs.getString("id"), rs.getString("nama"), rs.getString("username"), rs.getString("password"));
+        try (Connection conn = getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, username);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return new Petugas(rs.getString("idPetugas"), rs.getString("nama"), rs.getString("username"), rs.getString("password"));
             }
-            return p;
-        });    
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }    
+        return null;    
     }
 }

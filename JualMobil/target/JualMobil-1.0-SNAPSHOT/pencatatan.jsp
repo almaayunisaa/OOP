@@ -4,6 +4,9 @@
     Author     : Aqila Hasya Nafisah
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="com.mycompany.jualmobil.beans.Penjualan"%>
+<%@page import="com.mycompany.jualmobil.dao.PenjualanDao"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -589,8 +592,15 @@
                     <div class="scrollable-section">
                         <table>
                             <tbody>
+                                <%
+                                    PenjualanDao penjualanDao = new PenjualanDao();
+                                    List<Penjualan> daftarPenjualan = penjualanDao.getPenjualan();
+                                        
+                                    if (daftarPenjualan!=null) {
+                                        for (Penjualan p : daftarPenjualan) {
+                                %>
                                 <tr>
-                                    <td>27/05/2024</td>
+                                    <td><%= p.getTanggal() %></td>
                                     <td class="image-container">
                                         <svg width="212" height="135" viewBox="0 0 212 135" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                             <rect width="212" height="135" fill="url(#pattern0_255_764)"/>
@@ -602,41 +612,13 @@
                                             </defs>
                                         </svg>
                                     </td>
-                                    <td>sedanSI0133</td>
-                                    <td>Rp 355.000.000</td>
+                                    <td><%= p.getIdMobil() %></td>
+                                    <td>Rp <%= p.getHargaJual() %></td>
                                 </tr>
-                                <tr>
-                                    <td>27/05/2024</td>
-                                    <td class="image-container">
-                                        <img src="car-image-placeholder.jpg" alt="Car">
-                                    </td>
-                                    <td>sedanSI0133</td>
-                                    <td>Rp 355.000.000</td>
-                                </tr>
-                                <tr>
-                                    <td>27/05/2024</td>
-                                    <td class="image-container">
-                                        <img src="car-image-placeholder.jpg" alt="Car">
-                                    </td>
-                                    <td>sedanSI0133</td>
-                                    <td>Rp 355.000.000</td>
-                                </tr>
-                                <tr>
-                                    <td>27/05/2024</td>
-                                    <td class="image-container">
-                                        <img src="car-image-placeholder.jpg" alt="Car">
-                                    </td>
-                                    <td>sedanSI0133</td>
-                                    <td>Rp 355.000.000</td>
-                                </tr>
-                                <tr>
-                                    <td>27/05/2024</td>
-                                    <td class="image-container">
-                                        <img src="car-image-placeholder.jpg" alt="Car">
-                                    </td>
-                                    <td>sedanSI0133</td>
-                                    <td>Rp 355.000.000</td>
-                                </tr>
+                                <%
+                                        }
+                                    }
+                                %>
                             </tbody>
                         </table>
                     </div>

@@ -9,48 +9,109 @@ package com.mycompany.jualmobil.controller;
  * @author Aqila Hasya Nafisah
  */
 
-import java.util.List;    
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.*;
+import com.mycompany.jualmobil.beans.MPV;
 import com.mycompany.jualmobil.beans.Mobil;
-import com.mycompany.jualmobil.dao.MobilDao; 
+import com.mycompany.jualmobil.beans.SUV;
+import com.mycompany.jualmobil.beans.Sedan;
+import com.mycompany.jualmobil.dao.MobilDao;
 
-@Controller
-@RequestMapping("/mobil")
-public class MobilController {      
-    private MobilDao mobilDao;//will inject dao from XML file    
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
+import static java.lang.System.out;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+@WebServlet(name = "MobilController", urlPatterns = {"/mobilController"})
+public class MobilController extends HttpServlet {      
+    private MobilDao mobilDao;   
         
-    public MobilController(MobilDao mobilDao) {
-        this.mobilDao = mobilDao;
-    }
-    
-    @GetMapping    
-    public void tampilMobil(Model model) {
-        List<Mobil> daftarMobil = mobilDao.getMobil();
-        model.addAttribute("daftarMobil", daftarMobil);
-    }
-    
-    @GetMapping("/edit/{id}")
-    public void ubahMobil(@PathVariable String id, Model model) {
-        Mobil mobil = mobilDao.getMobById(id);
-        model.addAttribute("mobil", mobil);
-    }
-    
-    @PostMapping("/save")
-    public String simpanMobil(@ModelAttribute("mobil") Mobil m) {
-        if (m.getIdMobil()!=null) {
-            mobilDao.ubahMobil(m);
-        } else {
-            mobilDao.tambahMobil(m);
+    @Override
+    public void init() throws ServletException {
+        try {
+            mobilDao = new MobilDao();
+        } catch (SQLException ex) {
+            Logger.getLogger(MobilController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return "redirect:/mobil";
     }
     
-    @GetMapping("/delete/{id}")
-    public String hapusMobil(@PathVariable String id) {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("action");
+        if (action==null || action.isEmpty() || "tampil".equals(action)) {
+            try {
+                tampilMobil(request, response);
+            } catch (SQLException ex) {
+                Logger.getLogger(MobilController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else if ("edit".equals(action)) {
+            ubahMobil(request, response);
+        }
+    } 
+    
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("action");
+        if ("tambah".equals(action)) {
+            tambahMobil(request, response);
+        } else if ("delete".equals(action)) {
+            hapusMobil(request, response);
+        }
+    } 
+    
+    private void tampilMobil(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+        List<Mobil> daftarMobil = mobilDao.getMobil();
+        request.setAttribute("daftarMobil", daftarMobil);
+        
+        request.getRequestDispatcher("produk.jsp").forward(request, response); // diubah "" nya
+    } 
+    
+    private void ubahMobil(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String id = request.getPathInfo().split("/")[2];
+        Mobil m = mobilDao.getMobById(id);
+        request.setAttribute("mobil", m);
+        request.getRequestDispatcher("/").forward(request, response); //diubah "" nya
+    } 
+    
+    private void hapusMobil(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String id = request.getParameter("id"); 
         mobilDao.hapusMobil(id);
-        return "redirect:/mobil";
+        response.sendRedirect("mobilController?action=tampil");
+    } 
+    
+    private void tambahMobil(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String id = request.getParameter("idMobil");
+        String nama = request.getParameter("namaMobil");
+        String nomorRangka = request.getParameter("nomorRangka");
+        String nomorMesin = request.getParameter("nomorMesin");
+        String platNomor = request.getParameter("platNomor");
+        double kapasitasMesin = Double.parseDouble(request.getParameter("kapasitasMesin"));
+        int ketersediaan = Integer.parseInt(request.getParameter("ketersediaan"));
+        String tipe = request.getParameter("tipeMobil");
+        double harga = Double.parseDouble(request.getParameter("harga"));
+        String warna  = request.getParameter("warnaMobil");
+        int odoMeter = Integer.parseInt(request.getParameter("odoMeter"));
+       
+        Mobil m = null;
+        
+        if ("SUV".equals(tipe)) {
+            m = new SUV(id, nama, nomorRangka, nomorMesin, platNomor, kapasitasMesin, ketersediaan, harga, warna, odoMeter);
+            m.setTipe(tipe);
+        } else if ("MPV".equals(tipe)) {
+            m = new MPV(id, nama, nomorRangka, nomorMesin, platNomor, kapasitasMesin, ketersediaan, harga, warna, odoMeter);
+            m.setTipe(tipe);
+        } else if ("Sedan".equals(tipe)) {
+            m = new Sedan(id, nama, nomorRangka, nomorMesin, platNomor, kapasitasMesin, ketersediaan, harga, warna, odoMeter);
+            m.setTipe(tipe);
+        }
+        
+        mobilDao.tambahMobil(m);
+        response.sendRedirect("mobilController?action=tampil");
     }
 }

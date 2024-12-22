@@ -9,32 +9,32 @@ package com.mycompany.jualmobil.controller;
  * @author Alma
  */
 
-import java.util.List;    
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.*;
+import java.io.IOException;
 import com.mycompany.jualmobil.beans.Sales;
 import com.mycompany.jualmobil.dao.SalesDao; 
 
-@Controller
-@RequestMapping("/sales")
-public class SalesController {
+@WebServlet("/user/*")
+public class SalesController extends HttpServlet {
     private SalesDao salesDao;//will inject dao from XML file    
 
-    public SalesController(SalesDao salesDao) {
-        this.salesDao = salesDao;
+    @Override
+    public void init() throws ServletException {
+        salesDao = new SalesDao();
     }
     
-    @GetMapping("/tampil/{username}")    
-    public void getSalesUsn(@PathVariable String username, Model model) {
-        Sales s = salesDao.getUserbyUsn(username);
-        model.addAttribute("Sales", s);
-    }
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String idSales = request.getParameter("idSales");
+        String nama = request.getParameter("nama");
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        
+        Sales p = new Sales(idSales, nama, username, password);
+        salesDao.tambahPetugas(p);
+        response.sendRedirect(request.getContextPath() + "/user/list");
+    } 
     
-    @PostMapping("/save")
-    public String simpanPetugas(@ModelAttribute("Petugas") Sales s) {
-        salesDao.tambahSales(s);
-        return "redirect:/sales";
-    }
 }
