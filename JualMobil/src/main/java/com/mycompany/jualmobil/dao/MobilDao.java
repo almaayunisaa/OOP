@@ -119,13 +119,14 @@ public class MobilDao {
         return null;
     }
 
-    public Mobil getMobByNama(String nama){    
-        String sql="SELECT * FROM mobil WHERE nama = ?";    
+    public List<Mobil> getMobByNama(String nama){    
+        String sql="SELECT * FROM mobil WHERE nama LIKE ?"; 
+        List<Mobil> daftarMobil = new ArrayList<>();
         try (
             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, nama);
+            stmt.setString(1, "%" + nama + "%");
             ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 Mobil m=null;
                 String tipe = rs.getString("tipe");
                 if ("SUV".equals(tipe)) {
@@ -136,12 +137,12 @@ public class MobilDao {
                     m = new Sedan(rs.getString("idMobil"), rs.getString("nama"), rs.getString("nomorRangka"), rs.getString("nomorMesin"), rs.getString("platNomor"), rs.getDouble("kapasitasMesin"), rs.getInt("ketersediaan"), rs.getDouble("harga"), rs.getString("warna"), rs.getInt("odoMeter"));
                 }
                 m.setTipe(rs.getString("tipe"));
-                return m;
+                daftarMobil.add(m);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }    
-        return null;    
+        return daftarMobil;    
     }
     
     public List<Mobil> getMobil() throws SQLException {

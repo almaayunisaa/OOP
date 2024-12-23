@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Date; 
  
-public class Sales {
+public class Sales implements TampilMobilable {
     private String idSales;
     private String nama;
     private String username;
@@ -51,5 +51,28 @@ public class Sales {
         }
         return rekap;
     }
+    
+     @Override
+   public List<Mobil> tampilkanMobilBerdasarkanNama(String nama, List<Mobil> ListMobil) {
+       List<Mobil> listNamaMobil = new ArrayList<>();
+       for (Mobil m : ListMobil) {
+            if (m.getNama().equals(nama)) {
+                listNamaMobil.add(m); //ubah berdasarkan table
+            }
+        }
+       return listNamaMobil;
+   }
+   
+    @Override
+   public Mobil tampilkanMobil(String idMobil,  List<Mobil> ListMobil) {
+       Mobil mBalik = null;
+       for (Mobil m : ListMobil) {
+            if (m.getNama().equals(nama)) {
+                mBalik=m;
+                break;
+            }
+        }
+       return mBalik;
+   }
 
 }

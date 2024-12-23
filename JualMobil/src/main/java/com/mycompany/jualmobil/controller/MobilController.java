@@ -22,7 +22,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import static java.lang.System.out;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -52,6 +51,8 @@ public class MobilController extends HttpServlet {
             }
         } else if ("getMobil".equals(action)) {
             getMobil(request, response);
+        } else if ("getMobilNama".equals(action)) {
+            getMobilNama(request, response);
         }
     } 
     
@@ -71,7 +72,15 @@ public class MobilController extends HttpServlet {
         List<Mobil> daftarMobil = mobilDao.getMobil();
         request.setAttribute("daftarMobil", daftarMobil);
         
-        request.getRequestDispatcher("produk.jsp").forward(request, response);
+        String source = request.getParameter("source");
+        String user = request.getParameter("user");
+        if ("login".equals(source) && "Petugas".equals(user)) {
+            request.getRequestDispatcher("Homepage_Petugas.jsp").forward(request, response);
+        } else if ("login".equals(source) && "Sales".equals(user)) {
+            request.getRequestDispatcher("Homepage_Sales.jsp").forward(request, response);
+        } else if ("homepage".equals(source)) {
+            request.getRequestDispatcher("produk.jsp").forward(request, response);
+        }
     } 
     
     private void ubahMobil(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -100,13 +109,13 @@ public class MobilController extends HttpServlet {
         }
         
         mobilDao.ubahMobil(m);
-        response.sendRedirect("mobilController?action=tampil");
+        response.sendRedirect("mobilController?action=tampil&source=homepage&user=Petugas");
     } 
     
     private void hapusMobil(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id"); 
         mobilDao.hapusMobil(id);
-        response.sendRedirect("mobilController?action=tampil");
+        response.sendRedirect("mobilController?action=tampil&source=homepage&user=Petugas");
     } 
     
     private void tambahMobil(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -136,13 +145,20 @@ public class MobilController extends HttpServlet {
         }
         
         mobilDao.tambahMobil(m);
-        response.sendRedirect("mobilController?action=tampil");
+        response.sendRedirect("mobilController?action=tampil&source=homepage&user=Petugas");
     }
     
     private void getMobil(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("idMobil"); 
         request.setAttribute("mobil", mobilDao.getMobById(id));
         request.setAttribute("popUpEdit", true); 
-        request.getRequestDispatcher("mobilController?action=tampil").forward(request, response);
+        request.getRequestDispatcher("mobilController?action=tampil&source=homepage&user=Petugas").forward(request, response);
+    } 
+    
+    private void getMobilNama(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String nama = request.getParameter("namaMobilSearch"); 
+        List<Mobil> daftarMobil = mobilDao.getMobByNama(nama);
+        request.setAttribute("daftarMobilSearch", daftarMobil);
+        request.getRequestDispatcher("mobilController?action=tampil&source=homepage&user=Petugas").forward(request, response);
     } 
 }

@@ -408,12 +408,12 @@
         <div class="left-section">
             <div class="title d-flex justify-content-around">
                 <p class="logo "></p>
-                <p>GATAU EUY</p>
+                <p>WTSMobil</p>
             </div>
             <div class="buttons">
                 <ul class="nav  flex-column mb-auto">
                     <li class="nav-item">
-                        <a href="Homepage_Petugas.jsp" class="nav-link active">
+                        <a href="mobilController?action=tampil&source=login&user=Petugas" class="nav-link active">
                             <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M20.8333 19.7916V10.9374C20.8333 10.7757 20.7957 10.6162 20.7233 10.4716C20.651 10.3269 20.546 10.2011 20.4167 10.1041L13.125 4.63534C12.9447 4.5001 12.7254 4.427 12.5 4.427C12.2746 4.427 12.0553 4.5001 11.875 4.63534L4.58332 10.1041C4.45395 10.2011 4.34895 10.3269 4.27663 10.4716C4.20431 10.6162 4.16666 10.7757 4.16666 10.9374V19.7916C4.16666 20.0679 4.2764 20.3328 4.47175 20.5282C4.6671 20.7235 4.93206 20.8333 5.20832 20.8333H9.37499C9.65126 20.8333 9.91621 20.7235 10.1116 20.5282C10.3069 20.3328 10.4167 20.0679 10.4167 19.7916V16.6666C10.4167 16.3903 10.5264 16.1254 10.7218 15.93C10.9171 15.7347 11.1821 15.6249 11.4583 15.6249H13.5417C13.8179 15.6249 14.0829 15.7347 14.2782 15.93C14.4736 16.1254 14.5833 16.3903 14.5833 16.6666V19.7916C14.5833 20.0679 14.6931 20.3328 14.8884 20.5282C15.0838 20.7235 15.3487 20.8333 15.625 20.8333H19.7917C20.0679 20.8333 20.3329 20.7235 20.5282 20.5282C20.7236 20.3328 20.8333 20.0679 20.8333 19.7916Z" fill="white" stroke="white" stroke-width="2.08333" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg> 
@@ -422,11 +422,22 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="produk.jsp" class="nav-link">
+                        <a href="mobilController?action=tampil&source=homepage&user=Petugas" class="nav-link">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M9 8V6H15V8H9ZM7 22C6.45 22 5.97933 21.8043 5.588 21.413C5.19667 21.0217 5.00067 20.5507 5 20C4.99933 19.4493 5.19533 18.9787 5.588 18.588C5.98067 18.1973 6.45133 18.0013 7 18C7.54867 17.9987 8.01967 18.1947 8.413 18.588C8.80633 18.9813 9.002 19.452 9 20C8.998 20.548 8.80233 21.019 8.413 21.413C8.02367 21.807 7.55267 22.0027 7 22ZM17 22C16.45 22 15.9793 21.8043 15.588 21.413C15.1967 21.0217 15.0007 20.5507 15 20C14.9993 19.4493 15.1953 18.9787 15.588 18.588C15.9807 18.1973 16.4513 18.0013 17 18C17.5487 17.9987 18.0197 18.1947 18.413 18.588C18.8063 18.9813 19.002 19.452 19 20C18.998 20.548 18.8023 21.019 18.413 21.413C18.0237 21.807 17.5527 22.0027 17 22ZM1 4V2H4.275L8.525 11H15.525L19.425 4H21.7L17.3 11.95C17.1167 12.2833 16.871 12.5417 16.563 12.725C16.255 12.9083 15.9173 13 15.55 13H8.1L7 15H19V17H7C6.25 17 5.679 16.675 5.287 16.025C4.895 15.375 4.88267 14.7167 5.25 14.05L6.6 11.6L3 4H1Z" fill="white"/>
                                 </svg>                                
                             Produk 
+                            <hr>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="penjualanController?action=tampil&user=Petugas" class="nav-link">
+                            <svg width="27" height="25" viewBox="0 0 27 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M23.8516 5.85936C23.7391 5.78916 23.6106 5.74875 23.4782 5.74191C23.3458 5.73508 23.2138 5.76205 23.0947 5.8203C18.9023 7.87108 15.9082 6.91014 12.7432 5.89647C9.41406 4.8369 5.97656 3.73827 1.21973 6.06053C1.08836 6.12467 0.977618 6.22439 0.900105 6.34834C0.822591 6.4723 0.781412 6.61551 0.78125 6.7617V18.4736C0.781231 18.6062 0.81494 18.7366 0.879203 18.8525C0.943467 18.9684 1.03617 19.0661 1.14859 19.1363C1.26102 19.2065 1.38946 19.247 1.52183 19.2539C1.65421 19.2608 1.78616 19.2339 1.90527 19.1758C6.09766 17.125 9.0918 18.0859 12.2617 19.0996C14.1406 19.7002 16.0547 20.3125 18.2188 20.3125C19.8877 20.3125 21.708 19.9492 23.7764 18.9394C23.9077 18.8753 24.0185 18.7756 24.096 18.6516C24.1735 18.5277 24.2147 18.3845 24.2148 18.2383V6.52635C24.216 6.39345 24.1833 6.26245 24.1197 6.14574C24.0561 6.02902 23.9639 5.93046 23.8516 5.85936ZM4.6875 14.8437C4.6875 15.0509 4.60519 15.2497 4.45868 15.3962C4.31216 15.5427 4.11345 15.625 3.90625 15.625C3.69905 15.625 3.50034 15.5427 3.35382 15.3962C3.20731 15.2497 3.125 15.0509 3.125 14.8437V8.59373C3.125 8.38653 3.20731 8.18782 3.35382 8.04131C3.50034 7.89479 3.69905 7.81248 3.90625 7.81248C4.11345 7.81248 4.31216 7.89479 4.45868 8.04131C4.60519 8.18782 4.6875 8.38653 4.6875 8.59373V14.8437ZM12.5 15.625C11.8819 15.625 11.2777 15.4417 10.7638 15.0983C10.2499 14.7549 9.8494 14.2669 9.61288 13.6959C9.37635 13.1249 9.31447 12.4965 9.43505 11.8903C9.55562 11.2841 9.85325 10.7273 10.2903 10.2903C10.7273 9.85324 11.2842 9.55561 11.8903 9.43503C12.4965 9.31445 13.1249 9.37634 13.6959 9.61286C14.2669 9.84938 14.755 10.2499 15.0983 10.7638C15.4417 11.2777 15.625 11.8819 15.625 12.5C15.625 13.3288 15.2958 14.1236 14.7097 14.7097C14.1237 15.2957 13.3288 15.625 12.5 15.625ZM21.875 16.4062C21.875 16.6134 21.7927 16.8122 21.6462 16.9587C21.4997 17.1052 21.301 17.1875 21.0938 17.1875C20.8865 17.1875 20.6878 17.1052 20.5413 16.9587C20.3948 16.8122 20.3125 16.6134 20.3125 16.4062V10.1562C20.3125 9.94903 20.3948 9.75032 20.5413 9.60381C20.6878 9.45729 20.8865 9.37498 21.0938 9.37498C21.301 9.37498 21.4997 9.45729 21.6462 9.60381C21.7927 9.75032 21.875 9.94903 21.875 10.1562V16.4062Z" fill="white"/>
+                            <line x1="22.2143" y1="15.7142" x2="22.2143" y2="24.7142" stroke="#77C270" stroke-width="3"/>
+                            <line x1="26.1429" y1="20.7858" x2="17.1429" y2="20.7858" stroke="#77C270" stroke-width="3"/>
+                            </svg>
+                            Pencatatan 
                             <hr>
                         </a>
                     </li>
@@ -437,17 +448,7 @@
                 <div class="top-bar">
                     <div class="search-bar">
                         <div class="form">
-                            <div class="search-icon">
-                                <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M16.1458 14.5834H15.3229L15.0312 14.3021C15.6822 13.5458 16.158 12.655 16.4245 11.6934C16.691 10.7318 16.7417 9.72311 16.5729 8.73962C16.0833 5.84379 13.6667 3.53128 10.75 3.17712C9.7246 3.04739 8.68311 3.15396 7.70523 3.48867C6.72735 3.82337 5.839 4.37735 5.10815 5.10819C4.37731 5.83904 3.82334 6.72739 3.48863 7.70527C3.15393 8.68315 3.04736 9.72463 3.17708 10.75C3.53125 13.6667 5.84375 16.0834 8.73958 16.573C9.72307 16.7418 10.7317 16.6911 11.6933 16.4246C12.655 16.158 13.5458 15.6823 14.3021 15.0313L14.5833 15.323V16.1459L19.0104 20.573C19.4375 21 20.1354 21 20.5625 20.573C20.9896 20.1459 20.9896 19.448 20.5625 19.0209L16.1458 14.5834ZM9.89583 14.5834C7.30208 14.5834 5.20833 12.4896 5.20833 9.89587C5.20833 7.30212 7.30208 5.20837 9.89583 5.20837C12.4896 5.20837 14.5833 7.30212 14.5833 9.89587C14.5833 12.4896 12.4896 14.5834 9.89583 14.5834Z" fill="#757575"/>
-                                </svg>
-                            </div>
-                            <input type="text" class="form-control form-input" placeholder="Search anything...">
-                            <span class="left-pan">
-                                <svg width="30" height="30" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M19.7917 3.125H5.20834C3.73543 3.125 2.99897 3.125 2.54168 3.55417C2.08439 3.98333 2.08334 4.675 2.08334 6.05729V6.77604C2.08334 7.85625 2.08334 8.39687 2.35418 8.84479C2.62501 9.29271 3.11772 9.57187 4.10626 10.1281L7.14064 11.8365C7.80313 12.2094 8.13543 12.3958 8.37293 12.6021C8.86668 13.0302 9.17084 13.5344 9.30834 14.1542C9.37501 14.45 9.37501 14.7979 9.37501 15.4927V18.274C9.37501 19.2208 9.37501 19.6948 9.63751 20.0635C9.90001 20.4333 10.3667 20.6156 11.2979 20.9802C13.2552 21.7448 14.2333 22.1271 14.9292 21.6917C15.625 21.2562 15.625 20.2625 15.625 18.2729V15.4917C15.625 14.7979 15.625 14.45 15.6917 14.1531C15.8225 13.546 16.152 12.9998 16.6281 12.601C16.8646 12.3958 17.1969 12.2094 17.8594 11.8354L20.8938 10.1271C21.8813 9.57188 22.3761 9.29375 22.6458 8.84583C22.9167 8.39792 22.9167 7.85625 22.9167 6.775V6.05625C22.9167 4.675 22.9167 3.98333 22.4583 3.55417C22.0021 3.125 21.2656 3.125 19.7917 3.125Z" fill="#757575"/>
-                                </svg>
-                            </span>
+                           
                         </div>
                     </div>
                     <div class="profile">
@@ -471,7 +472,7 @@
                                             <img src="https://i.pinimg.com/736x/42/ca/a2/42caa25497d797187ba0afc537ee4bfc.jpg" alt="User Avatar" class="rounded-circle" style="width: 80px; height: 80px;">
                                           </div>             
                                           <h5 class="user-info">
-                                            <span class="text">Ms. Elphaba Thropp</span> 
+                                            <span class="text">Admin</span> 
                                             <p>Petugas</p>
                                           </h5>  
                                           <form action="#logout" method="POST">
@@ -494,30 +495,27 @@
                         <div class="container">
                             <div class="custom-search">
                                 <div class="input-group">
-                                    <input type="text" class="form-control custom-input" placeholder="Cari nama produk" aria-label="Search" aria-describedby="search-addon">
-                                    <button class="btn" type="button" id="search-addon">
-                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M9.5 16C7.68333 16 6.146 15.3707 4.888 14.112C3.63 12.8533 3.00067 11.316 3 9.5C2.99933 7.684 3.62867 6.14667 4.888 4.888C6.14733 3.62933 7.68467 3 9.5 3C11.3153 3 12.853 3.62933 14.113 4.888C15.373 6.14667 16.002 7.684 16 9.5C16 10.2333 15.8833 10.925 15.65 11.575C15.4167 12.225 15.1 12.8 14.7 13.3L20.3 18.9C20.4833 19.0833 20.575 19.3167 20.575 19.6C20.575 19.8833 20.4833 20.1167 20.3 20.3C20.1167 20.4833 19.8833 20.575 19.6 20.575C19.3167 20.575 19.0833 20.4833 18.9 20.3L13.3 14.7C12.8 15.1 12.225 15.4167 11.575 15.65C10.925 15.8833 10.2333 16 9.5 16ZM9.5 14C10.75 14 11.8127 13.5627 12.688 12.688C13.5633 11.8133 14.0007 10.7507 14 9.5C13.9993 8.24933 13.562 7.187 12.688 6.313C11.814 5.439 10.7513 5.00133 9.5 5C8.24867 4.99867 7.18633 5.43633 6.313 6.313C5.43967 7.18967 5.002 8.252 5 9.5C4.998 10.748 5.43567 11.8107 6.313 12.688C7.19033 13.5653 8.25267 14.0027 9.5 14Z" fill="#939393"/>
-                                        </svg>                                            
-                                    </button>
-                                </input>
+                                <form action="mobilController" method="get">
+                                    <input type="hidden" name="action" value="getMobilNama">
+                                        <div class="input-group">
+                                            <input 
+                                                type="text" 
+                                                class="form-control custom-input" 
+                                                placeholder="Cari nama produk" 
+                                                aria-label="Cari nama produk" 
+                                                name="namaMobilSearch"
+                                                id="namaMobilSearch">
+                                                    <button class="btn" type="submit">
+                                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M9.5 16C7.68333 16 6.146 15.3707 4.888 14.112C3.63 12.8533 3.00067 11.316 3 9.5C2.99933 7.684 3.62867 6.14667 4.888 4.888C6.14733 3.62933 7.68467 3 9.5 3C11.3153 3 12.853 3.62933 14.113 4.888C15.373 6.14667 16.002 7.684 16 9.5C16 10.2333 15.8833 10.925 15.65 11.575C15.4167 12.225 15.1 12.8 14.7 13.3L20.3 18.9C20.4833 19.0833 20.575 19.3167 20.575 19.6C20.575 19.8833 20.4833 20.1167 20.3 20.3C20.1167 20.4833 19.8833 20.575 19.6 20.575C19.3167 20.575 19.0833 20.4833 18.9 20.3L13.3 14.7C12.8 15.1 12.225 15.4167 11.575 15.65C10.925 15.8833 10.2333 16 9.5 16ZM9.5 14C10.75 14 11.8127 13.5627 12.688 12.688C13.5633 11.8133 14.0007 10.7507 14 9.5C13.9993 8.24933 13.562 7.187 12.688 6.313C11.814 5.439 10.7513 5.00133 9.5 5C8.24867 4.99867 7.18633 5.43633 6.313 6.313C5.43967 7.18967 5.002 8.252 5 9.5C4.998 10.748 5.43567 11.8107 6.313 12.688C7.19033 13.5653 8.25267 14.0027 9.5 14Z" fill="#939393"/>
+                                                        </svg>                                            
+                                                    </button>
+                                        </div>
+                                </form>
                                 </div>
                             </div>
                         </div>
                         <div class="buttons">
-                            <div class="dropdown" >
-                                <button class="btn custom-dropdown-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                  Filter
-                                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin: 3px;">
-                                    <path d="M12 14.475L19.35 7.12503C19.6 6.87503 19.896 6.75403 20.238 6.76203C20.58 6.77003 20.8757 6.89936 21.125 7.15003C21.3743 7.4007 21.4993 7.6967 21.5 8.03803C21.5007 8.37936 21.3757 8.67503 21.125 8.92503L13.425 16.6C13.225 16.8 13 16.95 12.75 17.05C12.5 17.15 12.25 17.2 12 17.2C11.75 17.2 11.5 17.15 11.25 17.05C11 16.95 10.775 16.8 10.575 16.6L2.875 8.90003C2.625 8.65003 2.504 8.35836 2.512 8.02503C2.52 7.6917 2.64933 7.40003 2.9 7.15003C3.15067 6.90003 3.44666 6.77503 3.788 6.77503C4.12933 6.77503 4.425 6.90003 4.675 7.15003L12 14.475Z" fill="#939393"/>
-                                    </svg>                                    
-                                </button>
-                                <ul class="dropdown-menu">
-                                  <li><a class="dropdown-item" href="#">Action</a></li>
-                                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                </ul>
-                              </div>                       
                             <button class="button" data-bs-toggle="modal" data-bs-target="#tambahModal">+ Tambah</button>
                         </div>
                     </div>
@@ -537,14 +535,19 @@
                             <table>      
                                 <tbody>
                                     <%
-                                         List<Mobil> daftarMobil = (List<Mobil>) request.getAttribute("daftarMobil");
+                                        List<Mobil> daftarMobil = null;
+                                        if (request.getAttribute("daftarMobilSearch")==null) {
+                                            daftarMobil = (List<Mobil>) request.getAttribute("daftarMobil");
+                                        } else {
+                                            daftarMobil = (List<Mobil>) request.getAttribute("daftarMobilSearch");
+                                        }
                                         
                                         if (daftarMobil!=null) {
                                             for (Mobil mobil : daftarMobil) {
                                     %>
                                     
                                     <tr>
-                                        <td><img src="https://via.placeholder.com/120x80" class="car-img" alt="Mobil"></td>
+                                        <td><img src="https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="car-img" alt="Mobil"></td>
                                         <td class="vertical-middle"><%=mobil.getNama() %></td>
                                         <td class="vertical-middle">Rp <%= String.format("%,.2f", mobil.getHarga()) %></td>
                                         <td class="vertical-middle"><%=mobil.getKetersediaan() %></td>
@@ -559,6 +562,7 @@
                                                     </svg>                                                
                                                     Edit
                                                 </button>
+                                            </form>
                                             
                                             <!-- Delete Button -->
                                             <form action="mobilController" method="post" style="display:inline;">
@@ -664,20 +668,6 @@
                                         <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
                                     </div>
                                 </div>
-                               
-
-                                <!-- <img id="modalImage" src="" alt="Car Image" class="img-fluid mb-3">
-                                <h3 id="modalName"></h3>
-                                <p><strong>Type:</strong> <span id="modalType"></span></p>
-                                <p><strong>Warna:</strong> <span id="modalColor"></span></p>
-                                <p><strong>Plat Nomor:</strong> <span id="modalPlate"></span></p>
-                                <p><strong>Odometer:</strong> <span id="modalOdometer"></span></p>
-                                <p><strong>Kapasitas Mesin:</strong> <span id="modalEngineCapacity"></span></p>
-                                <p><strong>Ketersediaan:</strong> <span id="modalAvailability"></span></p>
-                                <p><strong>Nomor Rangka:</strong> <span id="modalChassisNumber"></span></p>
-                                <p><strong>Nomor Mesin:</strong> <span id="modalEngineNumber"></span></p>
-                                <p><strong>Harga Sewa:</strong> <span id="modalPrice"></span></p>
-                                <p><strong>ID Mobil:</strong> <span id="modalID"></span></p> -->
                             </div>
                             </form>
                         </div>

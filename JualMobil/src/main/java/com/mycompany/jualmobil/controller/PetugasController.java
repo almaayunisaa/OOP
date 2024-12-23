@@ -9,33 +9,48 @@ package com.mycompany.jualmobil.controller;
  * @author Alma
  */
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import com.mycompany.jualmobil.beans.Petugas;
 import com.mycompany.jualmobil.dao.PetugasDao; 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-@WebServlet("/user/*")
+@WebServlet(name = "PetugasController", urlPatterns = {"/petugasController"})
 public class PetugasController extends HttpServlet {
-    private PetugasDao petugasDao;//will inject dao from XML file    
+    private PetugasDao petugasDao;   
 
     @Override
     public void init() throws ServletException {
-        petugasDao = new PetugasDao();
+        try {
+            petugasDao = new PetugasDao();
+        } catch (SQLException ex) {
+            Logger.getLogger(PetugasController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    
+
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String idPetugas = request.getParameter("idPetugas");
-        String nama = request.getParameter("nama");
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        
-        Petugas p = new Petugas(idPetugas, nama, username, password);
-        petugasDao.tambahPetugas(p);
-        response.sendRedirect(request.getContextPath() + "/user/list");
+    protected void doGet(jakarta.servlet.http.HttpServletRequest request, jakarta.servlet.http.HttpServletResponse response) throws jakarta.servlet.ServletException, IOException {
+        String action = request.getParameter("action");
+        if ("verifikasi".equals(action)) {
+            VerifikasiPass(request, response);
+        }
     } 
     
+    private void VerifikasiPass(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        Petugas s = petugasDao.getUserbyUsn(username);
+        if (s.getPassword() == null ? password == null : s.getPassword().equals(password)) {
+            response.sendRedirect("mobilController?action=tampil&source=login&user=Petugas");
+        } else {
+            response.sendRedirect("login.jsp?error=1");
+        }
+    } 
 }

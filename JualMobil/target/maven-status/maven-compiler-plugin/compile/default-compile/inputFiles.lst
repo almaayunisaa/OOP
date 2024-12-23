@@ -5,6 +5,7 @@ C:\Users\Alma\Documents\GitHub\OOP\JualMobil\src\main\java\com\mycompany\jualmob
 C:\Users\Alma\Documents\GitHub\OOP\JualMobil\src\main\java\com\mycompany\jualmobil\beans\Sales.java
 C:\Users\Alma\Documents\GitHub\OOP\JualMobil\src\main\java\com\mycompany\jualmobil\beans\Sedan.java
 C:\Users\Alma\Documents\GitHub\OOP\JualMobil\src\main\java\com\mycompany\jualmobil\beans\SUV.java
+C:\Users\Alma\Documents\GitHub\OOP\JualMobil\src\main\java\com\mycompany\jualmobil\beans\TampilMobilable.java
 C:\Users\Alma\Documents\GitHub\OOP\JualMobil\src\main\java\com\mycompany\jualmobil\controller\MobilController.java
 C:\Users\Alma\Documents\GitHub\OOP\JualMobil\src\main\java\com\mycompany\jualmobil\controller\PenjualanController.java
 C:\Users\Alma\Documents\GitHub\OOP\JualMobil\src\main\java\com\mycompany\jualmobil\controller\PetugasController.java
@@ -13,8 +14,6 @@ C:\Users\Alma\Documents\GitHub\OOP\JualMobil\src\main\java\com\mycompany\jualmob
 C:\Users\Alma\Documents\GitHub\OOP\JualMobil\src\main\java\com\mycompany\jualmobil\dao\PenjualanDao.java
 C:\Users\Alma\Documents\GitHub\OOP\JualMobil\src\main\java\com\mycompany\jualmobil\dao\PetugasDao.java
 C:\Users\Alma\Documents\GitHub\OOP\JualMobil\src\main\java\com\mycompany\jualmobil\dao\SalesDao.java
-C:\Users\Alma\Documents\GitHub\OOP\JualMobil\src\main\java\com\mycompany\jualmobil\JakartaRestConfiguration.java
-C:\Users\Alma\Documents\GitHub\OOP\JualMobil\src\main\java\com\mycompany\jualmobil\JDBC.java
 C:\Users\Alma\Documents\GitHub\OOP\JualMobil\src\main\java\com\mycompany\jualmobil\JualMobilApplication.java
 C:\Users\Alma\Documents\GitHub\OOP\JualMobil\src\main\java\com\mycompany\jualmobil\resources\JakartaEE11Resource.java
 C:\Users\Alma\Documents\GitHub\OOP\JualMobil\src\main\java\MobilApplication.java

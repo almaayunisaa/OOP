@@ -76,9 +76,10 @@
             <h2>Login Sales</h2>
         </div>
         <!-- Form login dengan method POST -->
-        <form action="Homepage_Sales.jsp" method="POST">
-            <input type="text" name="username" placeholder="Username" required />
-            <input type="password" name="password" placeholder="Password" required />
+         <form action="salesController" method="get">
+            <input type="hidden" name="action" value="verifikasi">
+            <input type="text" name="username" id="username" placeholder="Username" required />
+            <input type="password" name="password" id="password" placeholder="Password" required />
             <button type="submit">Login</button>
         </form>
     </div>

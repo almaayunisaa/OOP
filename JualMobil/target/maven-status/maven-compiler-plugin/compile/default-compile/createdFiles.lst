@@ -2,9 +2,9 @@ com\mycompany\jualmobil\dao\PetugasDao.class
 com\mycompany\jualmobil\beans\Sedan.class
 com\mycompany\jualmobil\controller\MobilController.class
 MobilApplication.class
-com\mycompany\jualmobil\JDBC.class
 com\mycompany\jualmobil\beans\SUV.class
 com\mycompany\jualmobil\beans\Mobil.class
+com\mycompany\jualmobil\beans\TampilMobilable.class
 com\mycompany\jualmobil\beans\Petugas.class
 com\mycompany\jualmobil\beans\Sales.class
 com\mycompany\jualmobil\beans\Penjualan.class
@@ -17,4 +17,3 @@ com\mycompany\jualmobil\JualMobilApplication.class
 com\mycompany\jualmobil\controller\SalesController.class
 com\mycompany\jualmobil\dao\SalesDao.class
 com\mycompany\jualmobil\dao\PenjualanDao.class
-com\mycompany\jualmobil\JakartaRestConfiguration.class

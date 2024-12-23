@@ -8,88 +8,130 @@ package com.mycompany.jualmobil.controller;
  *
  * @author Alma
  */
-
-import com.mycompany.jualmobil.beans.MPV;
-import com.mycompany.jualmobil.beans.Mobil;
-import java.util.List;    
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+  
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+
+import java.sql.SQLException;
 import java.util.List;
-import com.mycompany.jualmobil.beans.Penjualan;
-import com.mycompany.jualmobil.beans.SUV;
-import com.mycompany.jualmobil.beans.Sedan;
-import com.mycompany.jualmobil.dao.MobilDao;
-import com.mycompany.jualmobil.dao.PenjualanDao; 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import com.mycompany.jualmobil.beans.Penjualan;
+import com.mycompany.jualmobil.dao.PenjualanDao; 
 
-@WebServlet("/penjualan/*")
+@WebServlet(name = "PenjualanController", urlPatterns = {"/penjualanController"})
 public class PenjualanController extends HttpServlet {
     private PenjualanDao penjualanDao;   
 
     @Override
     public void init() throws ServletException {
-        penjualanDao = new PenjualanDao();
+        try {
+            penjualanDao = new PenjualanDao();
+        } catch (SQLException ex) {
+            Logger.getLogger(PenjualanController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
      @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String path = request.getPathInfo();
-        if (path==null || path.equals("/list")) {
+        String action = request.getParameter("action");
+        if ("tampil".equals(action)) {
             tampilPenjualan(request, response);
-        } else if (path.startsWith("/edit/")) {
-            ubahPenjualan(request, response);
-        } else if (path.startsWith("/delete/")) {
-            hapusPenjualan(request, response);
-        }
+        } else if ("getPenjualan".equals(action)) {
+            getPenjualan(request, response);
+        } else if ("getPenjualan_tanggal".equals(action)) {
+            getPenjualanTanggal(request, response);
+        } 
     } 
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String idPenjualan = request.getParameter("idPenjualan");
-        String idSales = request.getParameter("idSales");
-        String idMobil = request.getParameter("idMobil");
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        Date tanggal = null;
-        try {
-            tanggal = formatter.parse(request.getParameter("tanggal"));
-        } catch (ParseException ex) {
-            Logger.getLogger(PenjualanController.class.getName()).log(Level.SEVERE, null, ex);
+        String action = request.getParameter("action");
+        if ("tambah".equals(action)) {
+            tambahPenjualan(request, response);
+        } else if ("delete".equals(action)) {
+            hapusPenjualan(request, response);
+        } else if ("edit".equals(action)) {
+            ubahPenjualan(request, response);
         }
-        double hargaJual = Double.parseDouble(request.getParameter("hargaJual"));
-        
-        Penjualan p = new Penjualan(idPenjualan, idSales, idMobil, tanggal, hargaJual);
-        
-        if (idPenjualan!=null && !idPenjualan.isEmpty()) {
-            penjualanDao.ubahPenjualan(p);
-        } else {
-            penjualanDao.tambahPenjualan(p);
-        }
-        
-        response.sendRedirect(request.getContextPath() + "/penjualan/list");
     } 
         
     public void tampilPenjualan(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Penjualan> daftarPenjualan = penjualanDao.getPenjualan();
         request.setAttribute("daftarPenjualan", daftarPenjualan);
-        request.getRequestDispatcher("/").forward(request, response); // diubah "" nya
+        String user = request.getParameter("user");
+        request.setAttribute("user", user);
+        request.getRequestDispatcher("pencatatan.jsp").forward(request, response);
     } 
     
     public void ubahPenjualan(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String id = request.getPathInfo().split("/")[2];
-        Penjualan p = penjualanDao.getPenById(id);
-        request.setAttribute("penjualan", p);
-        request.getRequestDispatcher("/").forward(request, response); //diubah "" nya
+        String idPenjualan = request.getParameter("idPenjualan_edit");
+        String idSales = request.getParameter("idSales_edit");
+        String idMobil = request.getParameter("idMobil_edit");
+        String tanggal_form = request.getParameter("tanggal_edit");
+        double hargaJual = Double.parseDouble(request.getParameter("hargaJual_edit"));
+        java.sql.Date tanggal = null;
+        if (tanggal_form != null && !tanggal_form.isEmpty()) {
+            tanggal = java.sql.Date.valueOf(tanggal_form); 
+        } else {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Tanggal tidak boleh kosong");
+            return;
+        }
+        Penjualan p = new Penjualan(idPenjualan,idSales, idMobil, tanggal, hargaJual);
+        penjualanDao.ubahPenjualan(p);
+        response.sendRedirect("penjualanController?action=tampil");
+    } 
+    
+    public void tambahPenjualan(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String idPenjualan = request.getParameter("idPenjualan");
+        String idSales = request.getParameter("idSales");
+        String idMobil = request.getParameter("idMobil");
+        String tanggal_form = request.getParameter("tanggal");
+        double hargaJual = Double.parseDouble(request.getParameter("hargaJual"));
+        java.sql.Date tanggal = null;
+        if (tanggal_form != null && !tanggal_form.isEmpty()) {
+            tanggal = java.sql.Date.valueOf(tanggal_form); 
+        } else {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Tanggal tidak boleh kosong");
+            return;
+        }
+        Penjualan p = new Penjualan(idPenjualan,idSales, idMobil, tanggal, hargaJual);
+        penjualanDao.tambahPenjualan(p);
+        request.getRequestDispatcher("pencatatan.jsp").forward(request, response); 
     } 
     
     public void hapusPenjualan(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String id = request.getPathInfo().split("/")[2];
+        String id = request.getParameter("id"); 
         penjualanDao.hapusPenjualan(id);
-        request.getRequestDispatcher("/").forward(request, response); //diubah "" nya
+        response.sendRedirect("penjualanController?action=tampil");
+    } 
+    
+    private void getPenjualan(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String id = request.getParameter("idPenjualan"); 
+        request.setAttribute("penjualan", penjualanDao.getPenById(id) );
+        request.setAttribute("popUpEdit", true); 
+        request.getRequestDispatcher("penjualanController?action=tampil").forward(request, response);
+    } 
+    
+    private void getPenjualanTanggal(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String tanggalMulai_n = request.getParameter("tanggalMulai"); 
+        String tanggalAkhir_n = request.getParameter("tanggalAkhir"); 
+        
+        java.sql.Date tanggalMulai = null;
+        java.sql.Date tanggalAkhir = null;
+        if (tanggalMulai_n != null && !tanggalMulai_n.isEmpty() && tanggalAkhir_n != null && !tanggalAkhir_n.isEmpty()) {
+            tanggalMulai = java.sql.Date.valueOf(tanggalMulai_n); 
+            tanggalAkhir = java.sql.Date.valueOf(tanggalAkhir_n); 
+        } else {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Tanggal tidak boleh kosong");
+            return;
+        }
+        
+        request.setAttribute("daftarPenjualanTanggal", penjualanDao.getPenjualanbyTanggal(tanggalMulai, tanggalAkhir));
+        request.getRequestDispatcher("pencatatan.jsp").forward(request, response);
     } 
 }

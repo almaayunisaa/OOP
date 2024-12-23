@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @author Alma
  */
-public class Petugas {
+public class Petugas implements TampilMobilable {
     private String idPetugas;
     private String nama;
     private String username;
@@ -71,7 +71,7 @@ public class Petugas {
         }
     }
     
-   // tampilkan list mobil
+    @Override
    public List<Mobil> tampilkanMobilBerdasarkanNama(String nama, List<Mobil> ListMobil) {
        List<Mobil> listNamaMobil = new ArrayList<>();
        for (Mobil m : ListMobil) {
@@ -82,6 +82,7 @@ public class Petugas {
        return listNamaMobil;
    }
    
+    @Override
    public Mobil tampilkanMobil(String idMobil,  List<Mobil> ListMobil) {
        Mobil mBalik = null;
        for (Mobil m : ListMobil) {
@@ -93,9 +94,5 @@ public class Petugas {
        return mBalik;
    }
    
-   public void tambahSales(Sales sales, List<Sales> ListSales) {
-       if (sales!=null) {
-            ListSales.add(sales);
-       }
-   }
+
 }
