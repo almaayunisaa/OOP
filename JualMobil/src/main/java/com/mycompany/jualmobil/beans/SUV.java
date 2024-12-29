@@ -5,15 +5,38 @@
 package com.mycompany.jualmobil.beans;
 
 /**
- *
- * @author Alma
+ * Kelas untuk merepresentasikan tipe mobil
+ * SUV adalah turunan dari kelas {@link Mobil}
+ * 
+ * @author Kelompok Mobil
+ * @version 1.0
  */
 public class SUV extends Mobil {
 
+    /**
+     * Konstruktor untuk membuat objek SUV dengan semua atribut yang diperlukan.
+     * 
+     * @param idMobil ID unik untuk mobil.
+     * @param nama Nama mobil.
+     * @param nomorRangka Nomor rangka mobil.
+     * @param nomorMesin Nomor mesin mobil.
+     * @param platNomor Plat nomor mobil.
+     * @param kapasitasMesin Kapasitas mesin mobil
+     * @param ketersediaan Jumlah unit mobil yang tersedia.
+     * @param harga Harga mobil.
+     * @param warna Warna mobil.
+     * @param odoMeter Odometer/jarak tempuh mobil.
+     */
+    
     public SUV(String idMobil, String nama, String nomorRangka, String nomorMesin, String platNomor, double kapasitasMesin, int ketersediaan, double harga, String warna, int odoMeter) {
         super(idMobil, nama, nomorRangka, nomorMesin, platNomor, kapasitasMesin, ketersediaan, harga, warna, odoMeter);
     }
     
+    /**
+     * Menyetel tipe mobil ke dalam atribut tipe.
+     * 
+     * @param tipe Tipe mobil SUV.
+     */
     @Override
     public void setTipe(String tipe) {
         super.tipe=tipe;

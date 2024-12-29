@@ -58,7 +58,7 @@
             }
 
             .right-section {
-                overflow-y: auto; /* Bagian kanan scrollable */
+                overflow-y: auto; 
                 position: absolute;
                 background-color: white;
                 right: 0;
@@ -146,8 +146,8 @@
                 color: inherit;
             }
             .nav-link:hover {
-                color: inherit; /* Keeps the original color */
-                text-decoration: none; /* Removes any underline or text decoration */
+                color: inherit; 
+                text-decoration: none; 
             }
 
             .buttons {
@@ -199,7 +199,7 @@
             }
             
             .dropdown-toggle::after {
-                display: none !important; /* Hide Bootstrap's default caret */
+                display: none !important; 
             }
             
             .user-info span{
@@ -213,13 +213,13 @@
 
             .left-column, .right-column {
                 display: flex;
-                flex-direction: column; /* Stack items vertically */
-                gap: 8px; /* Space between rows */
+                flex-direction: column; 
+                gap: 8px; 
             }
 
             .left-column span, .right-column span {
                 font-weight: bold;
-                color: #000; /* Make text bold and black */
+                color: #000; 
             }
 
             .Acontainer {
@@ -234,10 +234,10 @@
             }
             .buttons {
                 display: flex;
-                gap: 10px; /* Jarak antar tombol */
+                gap: 10px;
             }
             .button {
-                background-color: #5A3EAA; /* Purple color */
+                background-color: #5A3EAA; 
                 color: white;
                 border: none;
                 border-radius: 5px;
@@ -247,7 +247,7 @@
                 margin-left: 10px;
             }
             .button:hover {
-                background-color: #473085; /* Darker purple on hover */
+                background-color: #473085;
             }
             .button:focus {
                 outline: none;
@@ -256,7 +256,7 @@
             .Bcontainer {
                 width: 95%;
                 margin: auto;
-                overflow-x: auto; /* Enable horizontal scrolling */
+                overflow-x: auto; 
             }
             table {
                 width: 100%;
@@ -281,7 +281,7 @@
             thead th{
                 text-align: center;
                 font-weight: bold;
-                background-color: #f5f5f5; /* Warna latar belakang header (opsional) */
+                background-color: #f5f5f5; 
             }
             
             tbody td {
@@ -302,7 +302,7 @@
                 height: auto;
             }
             .scrollable-section {
-                height: 400px; /* Adjust height as needed */
+                height: 400px; 
                 overflow-y: auto;
                 border: 1px solid #ddd;
             }
@@ -366,9 +366,9 @@
             }
 
             .custom-dropdown-btn {
-                background-color: inherit !important; /* Green background */
-                color: #939393DB !important; /* White text */
-                border: 2px solid #939393DB !important; /* Custom border */
+                background-color: inherit !important;
+                color: #939393DB !important;
+                border: 2px solid #939393DB !important; 
                 width: 95px;
                 height: 45px;
                 display: flex;
@@ -378,9 +378,9 @@
 
             .custom-search {
                 width: 250px;
-                background-color: inherit !important; /* Green background */
-                color: #939393DB !important; /* White text */
-                border: 2px solid #939393DB !important; /* Custom border */
+                background-color: inherit !important; 
+                color: #939393DB !important; 
+                border: 2px solid #939393DB !important;
                 border-radius: 6px;
                 height: 45px;
                 display: flex;
@@ -397,8 +397,8 @@
             }
 
             .custom-action-btn {
-                background-color: inherit !important; /* Green background */
-                color: #939393DB !important; /* White text */        
+                background-color: inherit !important; 
+                color: #939393DB !important;    
                 font-weight: 500;    
             }
         </style>
@@ -475,7 +475,8 @@
                                             <span class="text">Admin</span> 
                                             <p>Petugas</p>
                                           </h5>  
-                                          <form action="#logout" method="POST">
+                                          <form action="petugasController" method="get">
+                                            <input type="hidden" name="action" value="logout">
                                             <button type="submit" class="btn">
                                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M7.02301 5.5C5.4122 6.56898 4.18841 8.12823 3.53281 9.94691C2.87722 11.7656 2.82467 13.7471 3.38294 15.5979C3.94121 17.4488 5.08063 19.0707 6.63252 20.2236C8.18441 21.3765 10.0663 21.999 11.9995 21.999C13.9328 21.999 15.8146 21.3765 17.3665 20.2236C18.9184 19.0707 20.0578 17.4488 20.6161 15.5979C21.1744 13.7471 21.1218 11.7656 20.4662 9.94691C19.8106 8.12823 18.5868 6.56898 16.976 5.5M12 2V10" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -603,12 +604,7 @@
                                         <img id="selectedImage" src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg"
                                         alt="example placeholder" style="width: 300px;" />
                                     </div>
-                                    <div class="d-flex justify-content-center">
-                                        <div data-mdb-ripple-init class="btn btn-primary btn-rounded">
-                                            <label class="form-label text-white m-1" for="customFile1">Choose file</label>
-                                            <input type="file" class="form-control d-none" id="customFile1" onchange="displaySelectedImage(event, 'selectedImage')" />
-                                        </div>
-                                    </div>
+                                   
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col">
@@ -695,12 +691,7 @@
                                         <img id="selectedImage" src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg"
                                         alt="example placeholder" style="width: 300px;" />
                                     </div>
-                                    <div class="d-flex justify-content-center">
-                                        <div data-mdb-ripple-init class="btn btn-primary btn-rounded">
-                                            <label class="form-label text-white m-1" for="customFile1">Choose file</label>
-                                            <input type="file" class="form-control d-none" id="customFile1" onchange="displaySelectedImage(event, 'selectedImage')" />
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col">
@@ -714,10 +705,9 @@
                                     <div class="col">
                                         <label for="tipeMobil_edit" class="form-label">Type</label>
                                         <select class="form-control"  name="tipeMobil_edit" id="tipeMobil_edit" required>
-                                            <option value="" >-- Pilih Tipe --</option>
-                                            <option value="SUV">SUV</option>
-                                            <option value="MPV">MPV</option>
-                                            <option value="Sedan">Sedan</option>
+                                            <option value="SUV" ${mobil.tipe == 'SUV' ? 'selected' : ''}>SUV</option>
+                                            <option value="MPV" ${mobil.tipe == 'MPV' ? 'selected' : ''}>MPV</option>   
+                                            <option value="Sedan" ${mobil.tipe == 'Sedan' ? 'selected' : ''}>Sedan</option>
                                         </select>
                                     </div>
                                     <div class="col">
@@ -761,19 +751,6 @@
                                         <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
                                     </div>
                                 </div>
-
-                                <!-- <img id="modalImage" src="" alt="Car Image" class="img-fluid mb-3">
-                                <h3 id="modalName"></h3>
-                                <p><strong>Type:</strong> <span id="modalType"></span></p>
-                                <p><strong>Warna:</strong> <span id="modalColor"></span></p>
-                                <p><strong>Plat Nomor:</strong> <span id="modalPlate"></span></p>
-                                <p><strong>Odometer:</strong> <span id="modalOdometer"></span></p>
-                                <p><strong>Kapasitas Mesin:</strong> <span id="modalEngineCapacity"></span></p>
-                                <p><strong>Ketersediaan:</strong> <span id="modalAvailability"></span></p>
-                                <p><strong>Nomor Rangka:</strong> <span id="modalChassisNumber"></span></p>
-                                <p><strong>Nomor Mesin:</strong> <span id="modalEngineNumber"></span></p>
-                                <p><strong>Harga Sewa:</strong> <span id="modalPrice"></span></p>
-                                <p><strong>ID Mobil:</strong> <span id="modalID"></span></p> -->
                             </div>
                             
                             </form>

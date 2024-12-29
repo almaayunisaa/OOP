@@ -7,8 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author Alma
+ * Kelas yang merepresentasikan data petugas.
+ * Petugas memiliki kemampuan untuk mengelola data mobil, termasuk menambah, menghapus,
+ * mengubah, dan menampilkan mobil berdasarkan nama.
+ * 
+ * <p>Kelas ini mengimplementasikan antarmuka {@link TampilMobilable}, yang menyediakan metode
+ * untuk menampilkan mobil berdasarkan nama.</p>
+ * 
+ * @author Kelompok Mobil
+ * @version 1.0
  */
 public class Petugas implements TampilMobilable {
     private String idPetugas;
@@ -16,6 +23,14 @@ public class Petugas implements TampilMobilable {
     private String username;
     private String password;
 
+     /**
+     * Konstruktor untuk membuat objek Petugas.
+     * 
+     * @param idPetugas ID petugas.
+     * @param nama Nama petugas.
+     * @param username Username petugas
+     * @param password Password petugas.
+     */
     public Petugas(String idPetugas, String nama, String username, String password) {
         this.idPetugas = idPetugas;
         this.nama = nama;
@@ -23,26 +38,58 @@ public class Petugas implements TampilMobilable {
         this.password = password;
     }
 
+    /**
+     * Mengembalikan ID petugas.
+     * 
+     * @return ID petugas.
+     */
     public String getIdPetugas() {
         return idPetugas;
     }
 
+    /**
+     * Mengembalikan nama petugas.
+     * 
+     * @return Nama petugas.
+     */
     public String getNama() {
         return nama;
     }
 
+     /**
+     * Mengembalikan username petugas.
+     * 
+     * @return Username petugas.
+     */
     public String getUsername() {
         return username;
     }
 
+     /**
+     * Mengembalikan password petugas.
+     * 
+     * @return Password petugas.
+     */
     public String getPassword() {
         return password;
     }
     
+    /**
+     * Menambahkan mobil baru ke dalam daftar mobil.
+     * 
+     * @param m Objek mobil yang akan ditambahkan.
+     * @param ListMobil Daftar mobil yang ada.
+     */
     public void tambahMobil(Mobil m, List<Mobil> ListMobil) {
         ListMobil.add(m);
     }
     
+     /**
+     * Menghapus mobil dari daftar berdasarkan ID mobil.
+     * 
+     * @param idMobil ID mobil yang akan dihapus.
+     * @param ListMobil Daftar mobil yang ada.
+     */
     public void hapusMobil(String idMobil, List<Mobil> ListMobil) {
         Mobil mobilHapus=null;
         for (Mobil m : ListMobil) {
@@ -56,6 +103,13 @@ public class Petugas implements TampilMobilable {
         }
     }
     
+     /**
+     * Mengubah data mobil berdasarkan ID mobil.
+     * 
+     * @param idMobil ID mobil yang akan diubah.
+     * @param m Objek mobil dengan data baru.
+     * @param ListMobil Daftar mobil yang ada.
+     */
     public void ubahMobil(String idMobil, Mobil m, List<Mobil> ListMobil) {
         for (Mobil m_array : ListMobil) {
             if (m_array.getIdMobil().equals(idMobil)) {
@@ -71,28 +125,21 @@ public class Petugas implements TampilMobilable {
         }
     }
     
+    /**
+     * Menampilkan daftar mobil berdasarkan nama.
+     * 
+     * @param nama Nama mobil yang akan dicari.
+     * @param ListMobil Daftar mobil yang ada.
+     * @return Daftar mobil yang sesuai dengan nama yang diberikan.
+     */
     @Override
-   public List<Mobil> tampilkanMobilBerdasarkanNama(String nama, List<Mobil> ListMobil) {
+    public List<Mobil> tampilkanMobilBerdasarkanNama(String nama, List<Mobil> ListMobil) {
        List<Mobil> listNamaMobil = new ArrayList<>();
        for (Mobil m : ListMobil) {
             if (m.getNama().equals(nama)) {
-                listNamaMobil.add(m); //ubah berdasarkan table
+                listNamaMobil.add(m);
             }
         }
        return listNamaMobil;
-   }
-   
-    @Override
-   public Mobil tampilkanMobil(String idMobil,  List<Mobil> ListMobil) {
-       Mobil mBalik = null;
-       for (Mobil m : ListMobil) {
-            if (m.getNama().equals(nama)) {
-                mBalik=m;
-                break;
-            }
-        }
-       return mBalik;
-   }
-   
-
+    }
 }

@@ -69,9 +69,7 @@
 </head>
 <body>
     <div class="login-container">
-        <div class="logo">
-            <img src="src" width="20px" height="20px" alt="Logo"/>
-        </div>
+        
         <div class="login-text">
             <h2>Login Sales</h2>
         </div>

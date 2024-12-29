@@ -65,7 +65,7 @@
             }
 
             .right-section {
-                overflow-y: auto; /* Bagian kanan scrollable */
+                overflow-y: auto; 
                 position: absolute;
                 background-color: white;
                 right: 0;
@@ -153,8 +153,8 @@
                 color: inherit;
             }
             .nav-link:hover {
-                color: inherit; /* Keeps the original color */
-                text-decoration: none; /* Removes any underline or text decoration */
+                color: inherit; 
+                text-decoration: none; 
             }
 
             .buttons {
@@ -206,7 +206,7 @@
             }
             
             .dropdown-toggle::after {
-                display: none !important; /* Hide Bootstrap's default caret */
+                display: none !important; 
             }
             
             .user-info span{
@@ -220,13 +220,13 @@
 
             .left-column, .right-column {
                 display: flex;
-                flex-direction: column; /* Stack items vertically */
-                gap: 8px; /* Space between rows */
+                flex-direction: column; 
+                gap: 8px;
             }
 
             .left-column span, .right-column span {
                 font-weight: bold;
-                color: #000; /* Make text bold and black */
+                color: #000;
             }
 
             .Acontainer {
@@ -241,10 +241,10 @@
             }
             .buttons {
                 display: flex;
-                gap: 10px; /* Jarak antar tombol */
+                gap: 10px; 
             }
             .button {
-                background-color: #5A3EAA; /* Purple color */
+                background-color: #5A3EAA; 
                 color: white;
                 border: none;
                 border-radius: 5px;
@@ -254,7 +254,7 @@
                 margin-left: 10px;
             }
             .button:hover {
-                background-color: #473085; /* Darker purple on hover */
+                background-color: #473085;
             }
             .button:focus {
                 outline: none;
@@ -263,7 +263,7 @@
             .Bcontainer {
                 width: 95%;
                 margin: auto;
-                overflow-x: auto; /* Enable horizontal scrolling */
+                overflow-x: auto; 
             }
             table {
                 width: 100%;
@@ -309,7 +309,7 @@
                 height: auto;
             }
             .scrollable-section {
-                height: 400px; /* Adjust height as needed */
+                height: 400px;
                 overflow-y: auto;
                 border: 1px solid #ddd;
             }
@@ -562,38 +562,6 @@
                                         </div>
                                         </div>
                                     </form>
-
-                                    <!-- Tabel Data -->
-                                    <table id="rekapTable" class="table table-bordered custom-table">
-                                        <thead>
-                                            <tr>
-                                                <th>Tanggal</th>
-                                                <th>Foto Mobil</th>
-                                                <th>ID Mobil</th>
-                                                <th>Harga</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>27/05/2024</td>
-                                                <td><img src="https://via.placeholder.com/120x80" class="car-img" alt="Mobil"></td>
-                                                <td class="vertical-middle">sedanSI0133</td>
-                                                <td class="vertical-middle">355.000.000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>28/05/2024</td>
-                                                <td><img src="https://via.placeholder.com/120x80" class="car-img" alt="Mobil"></td>
-                                                <td class="vertical-middle">sedanSI0133</td>
-                                                <td class="vertical-middle">355.000.000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>10/06/2024</td>
-                                                <td><img src="https://via.placeholder.com/120x80" class="car-img" alt="Mobil"></td>
-                                                <td class="vertical-middle">sedanSI0133</td>
-                                                <td class="vertical-middle">355.000.000</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -708,7 +676,7 @@
 
                             <div class="mb-3">
                                 <label for="hargaJual_edit" class="form-label">Harga</label>
-                                <input type="text" class="form-control" value="${penjualan.hargaJual}" id="hargaJual_edit" name="hargaJual_edit" required>
+                                <input type="text" class="form-control" value="<%= (long) penjualan.getHargaJual() %>" id="hargaJual_edit" name="hargaJual_edit" required>
                             </div>
 
                             <!-- Tombol Simpan -->
@@ -732,70 +700,6 @@
     
     <!-- Bootstrap JS dan JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        const startDate = document.getElementById('startDate');
-        const endDate = document.getElementById('endDate');
-        const table = document.getElementById('rekapTable');
-        const emptyMessage = document.getElementById('emptyMessage');
-
-        // Fungsi untuk mengecek apakah tanggal telah diisi
-        function checkDateInput() {
-            if (startDate.value && endDate.value) {
-                table.style.display = 'table'; // Tampilkan tabel
-                emptyMessage.style.display = 'none'; // Sembunyikan pesan kosong
-            } else {
-                table.style.display = 'none'; // Sembunyikan tabel
-                emptyMessage.style.display = 'block'; // Tampilkan pesan kosong
-            }
-        }
-
-        // Event Listener untuk input tanggal
-        startDate.addEventListener('change', checkDateInput);
-        endDate.addEventListener('change', checkDateInput);
-        
-        const carData = {
-            mobil1: {
-                id: "SI0133",
-                nama: "Toyota Sedan",
-                tipe: "Sedan",
-                warna: "Hitam",
-                gambar: "https://via.placeholder.com/120x80"
-            },
-            mobil2: {
-                id: "SI2023",
-                nama: "Honda SUV",
-                tipe: "SUV",
-                warna: "Putih",
-                gambar: "https://via.placeholder.com/120x80"
-            },
-            mobil3: {
-                id: "SI3001",
-                nama: "Mazda Hatchback",
-                tipe: "Hatchback",
-                warna: "Merah",
-                gambar: "https://via.placeholder.com/120x80"
-            }
-        };
-
-        function showCarInfo() {
-            const select = document.getElementById("dataMobil");
-            const carInfo = document.getElementById("carInfo");
-            const selectedValue = select.value;
-
-            if (selectedValue && carData[selectedValue]) {
-                const car = carData[selectedValue];
-                carInfo.value = `
-INFORMASI MOBIL
-ID Mobil   : ${car.id}
-Nama Mobil : ${car.nama}
-Tipe Mobil : ${car.tipe}
-Warna Mobil: ${car.warna}
-                `;
-            } else {
-                carInfo.value = "Masukkan Data Mobil untuk melihat detail informasi.";
-            }
-        }
-    </script>
     </div>
     </body>
 </html>

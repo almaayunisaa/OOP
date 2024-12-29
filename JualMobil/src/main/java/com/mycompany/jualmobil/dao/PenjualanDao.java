@@ -4,21 +4,26 @@
  */
 package com.mycompany.jualmobil.dao;
 
-/**
- *
- * @author Alma
- */
-
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List; 
 import com.mycompany.jualmobil.beans.Penjualan;
 
+/**
+ * PenjualanDao adalah kelas DAO (Data Access Object) yang menangani operasi
+ * CRUD untuk entitas Penjualan pada database.
+ * 
+ * @author Kelompok Mobil
+ * @version 1.0
+ */
 public class PenjualanDao {
     private Connection conn;
     
-
+    /**
+     * Konstruktor untuk menginisialisasi koneksi ke database.
+     * 
+     * @throws SQLException jika terjadi kesalahan saat memuat driver JDBC atau koneksi gagal.
+     */
     public PenjualanDao() throws SQLException {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver"); 
@@ -32,6 +37,12 @@ public class PenjualanDao {
         conn = DriverManager.getConnection(PATH, USER, PASSWORD);
     }
     
+    /**
+     * Menambahkan data penjualan ke dalam database.
+     * 
+     * @param s Objek Penjualan yang akan ditambahkan.
+     * @throws IllegalArgumentException jika objek Penjualan null.
+     */
     public void tambahPenjualan(Penjualan s){ 
        if (s == null) {
           throw new IllegalArgumentException("Penjualan tidak boleh null");
@@ -50,6 +61,11 @@ public class PenjualanDao {
         }
     }
     
+    /**
+     * Memperbarui data penjualan di dalam database.
+     * 
+     * @param s Objek Penjualan yang datanya akan diperbarui.
+     */
     public void ubahPenjualan(Penjualan s){    
         String sql="UPDATE penjualan SET idSales = ?, idMobil = ?, tanggal = ?, hargaJual = ? WHERE idPenjualan = ?";    
        try (
@@ -65,6 +81,11 @@ public class PenjualanDao {
         }
     }
     
+    /**
+     * Menghapus data penjualan berdasarkan ID dari database.
+     * 
+     * @param idPenjualan ID penjualan yang akan dihapus.
+     */
     public void hapusPenjualan(String idPenjualan){    
         String sql="DELETE FROM penjualan WHERE idPenjualan = ? ";    
         try (
@@ -76,6 +97,11 @@ public class PenjualanDao {
         }  
     }   
 
+    /**
+     * Mengambil semua data penjualan dari database.
+     * 
+     * @return List dari objek Penjualan.
+     */
     public List<Penjualan> getPenjualan(){
         List<Penjualan> daftarPenjualan = new ArrayList<>();
         String sql="SELECT * FROM penjualan";    
@@ -92,6 +118,12 @@ public class PenjualanDao {
         return daftarPenjualan;   
     }
     
+    /**
+     * Mengambil data penjualan berdasarkan ID dari database.
+     * 
+     * @param idPenjualan ID penjualan yang dicari.
+     * @return Objek Penjualan jika ditemukan, null jika tidak ditemukan.
+     */
     public Penjualan getPenById(String idPenjualan){    
         String sql="SELECT * FROM penjualan WHERE idPenjualan = ?";    
         try (
@@ -107,6 +139,13 @@ public class PenjualanDao {
         return null;   
     }
     
+    /**
+     * Mengambil data penjualan berdasarkan rentang tanggal dari database.
+     * 
+     * @param tanggalMulai Tanggal mulai pencarian.
+     * @param tanggalAkhir Tanggal akhir pencarian.
+     * @return List dari objek Penjualan yang sesuai dengan rentang tanggal.
+     */
     public List<Penjualan> getPenjualanbyTanggal(java.sql.Date tanggalMulai, java.sql.Date tanggalAkhir){
         List<Penjualan> daftarPenjualan = new ArrayList<>();
         String sql="SELECT * FROM penjualan WHERE tanggal BETWEEN ? AND ?";    

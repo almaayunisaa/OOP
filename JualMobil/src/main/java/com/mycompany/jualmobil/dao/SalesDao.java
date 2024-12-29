@@ -4,17 +4,28 @@
  */
 package com.mycompany.jualmobil.dao;
 
-/**
- *
- * @author Alma
- */
-
 import java.sql.*; 
 import com.mycompany.jualmobil.beans.Sales;  
 
+/**
+ * Kelas DAO untuk mengelola operasi database terkait entitas Sales.
+ * 
+ * <p>Kelas ini berfungsi untuk melakukan koneksi ke database dan menjalankan operasi
+ * seperti mengambil data pengguna berdasarkan username.</p>
+ * 
+ * <p>Kelas ini memanfaatkan JDBC untuk memanipulasi dengan database MySQL.</p>
+ * 
+ * @author Kelompok Mobil
+ * @version 1.0
+ */
 public class SalesDao {
     private Connection conn;
 
+    /**
+     * Konstruktor untuk menginisialisasi koneksi database.
+     * 
+     * @throws SQLException jika terjadi kesalahan dalam memuat driver JDBC atau koneksi ke database.
+     */
     public SalesDao() throws SQLException {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver"); 
@@ -28,6 +39,16 @@ public class SalesDao {
         conn = DriverManager.getConnection(PATH, USER, PASSWORD);
     }
 
+    /**
+     * Mengambil data pengguna dari database berdasarkan username.
+     * 
+     * <p>Metode ini memeriksa apakah pengguna dengan username memiliki peran sebagai Sales.
+     * Jika iya, maka data pengguna tersebut dikembalikan dalam bentuk objek {@link Sales}.
+     * Jika tidak, atau jika username tidak ditemukan, metode ini mengembalikan null.</p>
+     * 
+     * @param username Username yang akan dicari.
+     * @return Objek {@link Sales} jika pengguna ditemukan dan memiliki peran "Sales", atau null jika tidak ditemukan.
+     */
     public Sales getUserbyUsn(String username){    
         String sql="SELECT * FROM user WHERE username = ?";    
         try (

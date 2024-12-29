@@ -56,7 +56,7 @@
             }
 
             .right-section {
-                overflow-y: auto; /* Bagian kanan scrollable */
+                overflow-y: auto; 
                 position: absolute;
                 background-color: white;
                 right: 0;
@@ -146,8 +146,8 @@
                 color: inherit;
             }
             .nav-link:hover {
-                color: inherit; /* Keeps the original color */
-                text-decoration: none; /* Removes any underline or text decoration */
+                color: inherit;
+                text-decoration: none; 
             }
 
             .buttons {
@@ -196,12 +196,12 @@
                 color: black;
                 width: 200px;
                 padding: 10px;
-                position: absolute; /* Pastikan dropdown diposisikan secara absolut */
-                z-index: 1050; /* Pastikan nilainya lebih tinggi daripada elemen lainnya */
+                position: absolute; 
+                z-index: 1050; 
             }
             
             .dropdown-toggle::after {
-                display: none !important; /* Hide Bootstrap's default caret */
+                display: none !important; 
             }
             
             .user-info span{
@@ -219,12 +219,12 @@
                 flex-wrap: wrap;
                 gap: 80px;
                 justify-content: center;
-                position: relative; /* Tidak menyebabkan konflik dengan dropdown */
-                overflow: visible; /* Hindari menyembunyikan elemen dropdown */
+                position: relative; 
+                overflow: visible; 
             }
 
             .card {
-                width: 35%; /* 45% untuk 2 kolom, sisa 10% adalah jarak */
+                width: 35%; 
                 border: 1px solid #ddd;
                 border-radius: 8px;
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -232,10 +232,10 @@
                 font-family: Poppins;
                 display: grid;  
                 grid-template-rows: auto auto auto auto auto; 
-                row-gap: 10px; /* Jarak antar elemen */
+                row-gap: 10px;
                 cursor: pointer;
                 transition: box-shadow 0.3s ease;
-                z-index: 1; /* Pastikan card tidak menutupi dropdown */
+                z-index: 1; 
             }       
             
             .card:hover {
@@ -248,7 +248,7 @@
                 margin-bottom: 16px;
             }
 
-            .card h3 { /* font buat judul */
+            .card h3 { 
                 margin: 8px 0;
                 font-size: 18px;
                 color: #333;
@@ -269,8 +269,8 @@
             
             .info-container {
                 display: flex;
-                justify-content: space-between; /* Distribute space between columns */
-                gap: 20px; /* Space between columns */
+                justify-content: space-between;
+                gap: 20px;
                 font-family: Arial, sans-serif;
                 font-size: 14px;
                 color: #555;
@@ -278,13 +278,13 @@
 
             .left-column, .right-column {
                 display: flex;
-                flex-direction: column; /* Stack items vertically */
-                gap: 8px; /* Space between rows */
+                flex-direction: column; 
+                gap: 8px; 
             }
 
             .left-column span, .right-column span {
                 font-weight: bold;
-                color: #000; /* Make text bold and black */
+                color: #000; 
             }
 
             .custom-modal-size{
@@ -368,7 +368,8 @@
                                             <span class="text">Admin</span> 
                                             <p>Petugas</p>
                                           </h5>  
-                                          <form action="#logout" method="POST">
+                                          <form action="petugasController" method="get">
+                                            <input type="hidden" name="action" value="logout">
                                             <button type="submit" class="btn">
                                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M7.02301 5.5C5.4122 6.56898 4.18841 8.12823 3.53281 9.94691C2.87722 11.7656 2.82467 13.7471 3.38294 15.5979C3.94121 17.4488 5.08063 19.0707 6.63252 20.2236C8.18441 21.3765 10.0663 21.999 11.9995 21.999C13.9328 21.999 15.8146 21.3765 17.3665 20.2236C18.9184 19.0707 20.0578 17.4488 20.6161 15.5979C21.1744 13.7471 21.1218 11.7656 20.4662 9.94691C19.8106 8.12823 18.5868 6.56898 16.976 5.5M12 2V10" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>

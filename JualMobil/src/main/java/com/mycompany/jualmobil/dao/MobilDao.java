@@ -4,11 +4,6 @@
  */
 package com.mycompany.jualmobil.dao;
 
-/**
- *
- * @author Aqila Hasya Nafisah
- */
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;    
@@ -17,10 +12,21 @@ import com.mycompany.jualmobil.beans.SUV;
 import com.mycompany.jualmobil.beans.Sedan;
 import com.mycompany.jualmobil.beans.MPV;
 
+/**
+ * Kelas DAO untuk mengelola operasi CRUD pada data mobil.
+ * Kelas ini berfungsi untuk berinteraksi dengan database terkait tabel 'mobil'.
+ * 
+ * @author Kelompok Mobil
+ * @version 1.0
+ */
 public class MobilDao {
     private Connection conn;
-    
 
+    /**
+     * Konstruktor untuk membuat koneksi ke database.
+     * 
+     * @throws SQLException Jika terjadi kesalahan saat memuat driver atau koneksi database.
+     */
     public MobilDao() throws SQLException {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver"); 
@@ -34,7 +40,12 @@ public class MobilDao {
         conn = DriverManager.getConnection(PATH, USER, PASSWORD);
     }
 
-    
+    /**
+     * Menambahkan data mobil baru ke database.
+     * 
+     * @param m Objek mobil yang akan ditambahkan.
+     * @throws IllegalArgumentException Jika objek mobil null.
+     */
     public void tambahMobil(Mobil m) {   
         if (m == null) {
             throw new IllegalArgumentException("Mobil tidak boleh null");
@@ -59,6 +70,12 @@ public class MobilDao {
         }
     }    
     
+    /**
+     * Memperbarui data mobil yang sudah ada di database.
+     * 
+     * @param m Objek mobil dengan data yang telah diperbarui.
+     * @throws IllegalArgumentException Jika objek mobil null.
+     */
     public void ubahMobil(Mobil m){    
         String sql = "UPDATE mobil SET nama = ?, nomorRangka = ?, nomorMesin = ?, platNomor = ?, kapasitasMesin = ?, ketersediaan = ?, tipe = ?, harga = ?, warna = ?, odoMeter = ? WHERE idMobil = ?";
         if (m == null) {
@@ -83,6 +100,11 @@ public class MobilDao {
         }
     }
     
+    /**
+     * Menghapus data mobil berdasarkan ID dari database.
+     * 
+     * @param idMobil ID mobil yang akan dihapus.
+     */
     public void hapusMobil(String idMobil){    
         String sql="DELETE FROM mobil WHERE idMobil = ?";    
         try (
@@ -94,6 +116,12 @@ public class MobilDao {
         }
     }    
     
+    /**
+     * Mengambil data mobil berdasarkan ID.
+     * 
+     * @param idMobil ID mobil yang dicari.
+     * @return Objek mobil yang sesuai dengan ID, atau null jika tidak ditemukan.
+     */
     public Mobil getMobById(String idMobil){    
         String sql="SELECT * FROM mobil WHERE idMobil = ?";    
         try (
@@ -119,6 +147,12 @@ public class MobilDao {
         return null;
     }
 
+    /**
+     * Mengambil data mobil berdasarkan nama yang mengandung keyword tertentu.
+     * 
+     * @param nama Nama mobil yang akan dicari (mendukung pencarian menggunakan wildcard).
+     * @return Daftar objek mobil yang sesuai dengan nama.
+     */
     public List<Mobil> getMobByNama(String nama){    
         String sql="SELECT * FROM mobil WHERE nama LIKE ?"; 
         List<Mobil> daftarMobil = new ArrayList<>();
@@ -145,6 +179,12 @@ public class MobilDao {
         return daftarMobil;    
     }
     
+    /**
+     * Mengambil semua data mobil dari database.
+     * 
+     * @return Daftar semua objek mobil.
+     * @throws SQLException Jika terjadi kesalahan dalam pengambilan data.
+     */
     public List<Mobil> getMobil() throws SQLException {
         List<Mobil> daftarMobil = new ArrayList<>();
         String sql="SELECT * FROM mobil";   

@@ -1,7 +1,6 @@
 com\mycompany\jualmobil\dao\PetugasDao.class
 com\mycompany\jualmobil\beans\Sedan.class
 com\mycompany\jualmobil\controller\MobilController.class
-MobilApplication.class
 com\mycompany\jualmobil\beans\SUV.class
 com\mycompany\jualmobil\beans\Mobil.class
 com\mycompany\jualmobil\beans\TampilMobilable.class

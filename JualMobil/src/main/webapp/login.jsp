@@ -59,9 +59,6 @@
     </head>
     <body>
         <div class="login-container">
-            <div class="logo">
-                <img src="src" width="width" height="height" alt="alt"/>
-            </div>
             <div class="login-text">
                 <h1>Login sebagai</h1>
             </div>

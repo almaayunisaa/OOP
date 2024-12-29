@@ -56,7 +56,7 @@
             }
 
             .right-section {
-                overflow-y: auto; /* Bagian kanan scrollable */
+                overflow-y: auto;
                 position: absolute;
                 background-color: white;
                 right: 0;
@@ -146,8 +146,8 @@
                 color: inherit;
             }
             .nav-link:hover {
-                color: inherit; /* Keeps the original color */
-                text-decoration: none; /* Removes any underline or text decoration */
+                color: inherit; 
+                text-decoration: none; 
             }
 
             .buttons {
@@ -196,12 +196,12 @@
                 color: black;
                 width: 200px;
                 padding: 10px;
-                position: absolute; /* Pastikan dropdown diposisikan secara absolut */
-                z-index: 1050; /* Pastikan nilainya lebih tinggi daripada elemen lainnya */
+                position: absolute; 
+                z-index: 1050; 
             }
             
             .dropdown-toggle::after {
-                display: none !important; /* Hide Bootstrap's default caret */
+                display: none !important; 
             }
             
             .user-info span{
@@ -219,12 +219,12 @@
                 flex-wrap: wrap;
                 gap: 80px;
                 justify-content: center;
-                position: relative; /* Tidak menyebabkan konflik dengan dropdown */
-                overflow: visible; /* Hindari menyembunyikan elemen dropdown */
+                position: relative; 
+                overflow: visible; 
             }
 
             .card {
-                width: 35%; /* 45% untuk 2 kolom, sisa 10% adalah jarak */
+                width: 35%; 
                 border: 1px solid #ddd;
                 border-radius: 8px;
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -232,10 +232,10 @@
                 font-family: Poppins;
                 display: grid;  
                 grid-template-rows: auto auto auto auto auto; 
-                row-gap: 10px; /* Jarak antar elemen */
+                row-gap: 10px;
                 cursor: pointer;
                 transition: box-shadow 0.3s ease;
-                z-index: 1; /* Pastikan card tidak menutupi dropdown */
+                z-index: 1;
             }       
             
             .card:hover {
@@ -248,7 +248,7 @@
                 margin-bottom: 16px;
             }
 
-            .card h3 { /* font buat judul */
+            .card h3 { 
                 margin: 8px 0;
                 font-size: 18px;
                 color: #333;
@@ -269,8 +269,8 @@
             
             .info-container {
                 display: flex;
-                justify-content: space-between; /* Distribute space between columns */
-                gap: 20px; /* Space between columns */
+                justify-content: space-between;
+                gap: 20px; 
                 font-family: Arial, sans-serif;
                 font-size: 14px;
                 color: #555;
@@ -278,13 +278,13 @@
 
             .left-column, .right-column {
                 display: flex;
-                flex-direction: column; /* Stack items vertically */
-                gap: 8px; /* Space between rows */
+                flex-direction: column; 
+                gap: 8px; 
             }
 
             .left-column span, .right-column span {
                 font-weight: bold;
-                color: #000; /* Make text bold and black */
+                color: #000;
             }
 
             .custom-modal-size{
@@ -333,7 +333,26 @@
             <div class="right-section">
                 <div class="top-bar">
                     <div class="search-bar">
-                        
+                        <div class="input-group">
+                            <form action="mobilController" method="get">
+                                <input type="hidden" name="action" value="getMobilNama">
+                                <input type="hidden" name="user" value="Sales">
+                                <div class="input-group">
+                                <input 
+                                    type="text" 
+                                    class="form-control custom-input" 
+                                    placeholder="Cari nama produk" 
+                                    aria-label="Cari nama produk" 
+                                    name="namaMobilSearch"
+                                    id="namaMobilSearch">
+                                    <button class="btn" type="submit">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M9.5 16C7.68333 16 6.146 15.3707 4.888 14.112C3.63 12.8533 3.00067 11.316 3 9.5C2.99933 7.684 3.62867 6.14667 4.888 4.888C6.14733 3.62933 7.68467 3 9.5 3C11.3153 3 12.853 3.62933 14.113 4.888C15.373 6.14667 16.002 7.684 16 9.5C16 10.2333 15.8833 10.925 15.65 11.575C15.4167 12.225 15.1 12.8 14.7 13.3L20.3 18.9C20.4833 19.0833 20.575 19.3167 20.575 19.6C20.575 19.8833 20.4833 20.1167 20.3 20.3C20.1167 20.4833 19.8833 20.575 19.6 20.575C19.3167 20.575 19.0833 20.4833 18.9 20.3L13.3 14.7C12.8 15.1 12.225 15.4167 11.575 15.65C10.925 15.8833 10.2333 16 9.5 16ZM9.5 14C10.75 14 11.8127 13.5627 12.688 12.688C13.5633 11.8133 14.0007 10.7507 14 9.5C13.9993 8.24933 13.562 7.187 12.688 6.313C11.814 5.439 10.7513 5.00133 9.5 5C8.24867 4.99867 7.18633 5.43633 6.313 6.313C5.43967 7.18967 5.002 8.252 5 9.5C4.998 10.748 5.43567 11.8107 6.313 12.688C7.19033 13.5653 8.25267 14.0027 9.5 14Z" fill="#939393"/>
+                                        </svg>                                            
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                     <div class="profile">
                         <!-- Right-side dropdown -->
@@ -359,7 +378,8 @@
                                             <span class="text">Admin</span> 
                                             <p>Sales</p>
                                           </h5>
-                                          <form action="login.jsp" method="POST">
+                                          <form action="salesController" method="get">
+                                            <input type="hidden" name="action" value="logout">
                                             <button type="submit" class="btn">
                                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M7.02301 5.5C5.4122 6.56898 4.18841 8.12823 3.53281 9.94691C2.87722 11.7656 2.82467 13.7471 3.38294 15.5979C3.94121 17.4488 5.08063 19.0707 6.63252 20.2236C8.18441 21.3765 10.0663 21.999 11.9995 21.999C13.9328 21.999 15.8146 21.3765 17.3665 20.2236C18.9184 19.0707 20.0578 17.4488 20.6161 15.5979C21.1744 13.7471 21.1218 11.7656 20.4662 9.94691C19.8106 8.12823 18.5868 6.56898 16.976 5.5M12 2V10" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -378,9 +398,12 @@
                     <!--Cards Mobil -->
                     <%
                         List<Mobil> daftarMobil = null;
-                        
-                        daftarMobil = (List<Mobil>) request.getAttribute("daftarMobil");
-              
+                        if (request.getAttribute("daftarMobilSearch")==null) {
+                            daftarMobil = (List<Mobil>) request.getAttribute("daftarMobil");
+                        } else {
+                            daftarMobil = (List<Mobil>) request.getAttribute("daftarMobilSearch");
+                        }
+                                        
                         if (daftarMobil!=null) {
                             for (Mobil mobil : daftarMobil) {
                     %>
@@ -530,8 +553,6 @@
             });
         });
         </script>
-
-
     </div>
     </body>
 </html>
